@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "canvas-authoring": {
+      "type": "stdio",
+      "command": "dnx",
+      "args": ["Microsoft.PowerApps.CanvasAuthoring.McpServer", "--yes"]
+    }
+  }
+}
