@@ -1,0 +1,527 @@
+Screens:
+  Dashboard:
+    Properties:
+      Fill: =RGBA(245, 245, 247, 1)
+      LoadingSpinnerColor: =RGBA(0, 102, 204, 1)
+    Children:
+      - DashboardShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(245, 245, 247, 1)
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            Width: =Parent.Width
+          Children:
+            - DashboardNav:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(0, 0, 0, 1)
+                  FillPortions: =0
+                  Height: =If(App.Width < 440, 104, 64)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutGap: =8
+                  LayoutMinHeight: =If(App.Width < 440, 104, 64)
+                  LayoutMinWidth: =280
+                  LayoutWrap: =true
+                  PaddingLeft: =16
+                  PaddingRight: =16
+                Children:
+                  - DashboardBrandBadge:
+                      Control: ModernText
+                      Properties:
+                        Align: =Align.Center
+                        Color: =RGBA(255, 255, 255, 1)
+                        Fill: =RGBA(0, 102, 204, 1)
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =13
+                        Text: ="AI"
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =App.Width >= 900
+                        Width: =32
+                  - DashboardBrand:
+                      Control: ModernText
+                      Properties:
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =36
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =17
+                        Text: ="AI Requirement Analyzer"
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =App.Width >= 900
+                        Width: =210
+                  - DashboardNavUpload:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open upload requirements"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="ArrowUpload"
+                        OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Upload"
+                        Width: =If(App.Width < 720, 88, 100)
+                  - DashboardNavReview:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open review artifacts"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="CheckmarkCircle"
+                        OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Review"
+                        Width: =If(App.Width < 720, 84, 100)
+                  - DashboardNavJira:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open Jira and sprint"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="Link"
+                        OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Jira & sprint"
+                        Width: =If(App.Width < 720, 112, 124)
+                  - DashboardNavCurrent:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Dashboard, current page"
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Height: =40
+                        Icon: ="DataBarVertical"
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Dashboard"
+                        Width: =If(App.Width < 720, 96, 116)
+            - DashboardContent:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =16
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =280
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  PaddingBottom: =24
+                  PaddingLeft: =If(App.Width < 720, 16, 28)
+                  PaddingRight: =If(App.Width < 720, 16, 28)
+                  PaddingTop: =22
+                Children:
+                  - DashboardTitle:
+                      Control: ModernText
+                      Properties:
+                        AutoHeight: =true
+                        Color: =RGBA(29, 29, 31, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =46
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =34
+                        Text: ="Tracking dashboard"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                  - DashboardSubtitle:
+                      Control: ModernText
+                      Properties:
+                        Color: =RGBA(122, 122, 122, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =26
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =14
+                        Text: ="Analysis, approval, test coverage, and Jira delivery at a glance."
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                  - DashboardSetup:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(245, 245, 247, 1)
+                        FillPortions: =0
+                        Height: =76
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =70
+                        LayoutMinWidth: =260
+                        PaddingBottom: =12
+                        PaddingLeft: =16
+                        PaddingRight: =16
+                        PaddingTop: =12
+                        RadiusBottomLeft: =8
+                        RadiusBottomRight: =8
+                        RadiusTopLeft: =8
+                        RadiusTopRight: =8
+                      Children:
+                        - DashboardSetupTitle:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(51, 51, 51, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =22
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="Device-local workspace"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - DashboardSetupText:
+                            Control: ModernText
+                            Properties:
+                              AutoHeight: =true
+                              Color: =RGBA(51, 51, 51, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =30
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="Counts below reflect this device's saved offline drafts only. Data is not shared, backed up, or available in the web player."
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                  - DashboardMetrics:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =140
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutMinHeight: =130
+                        LayoutMinWidth: =260
+                        LayoutWrap: =true
+                      Children:
+                        - MetricDocuments:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =110
+                              LayoutMinWidth: =150
+                              PaddingBottom: =14
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =14
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - MetricDocumentsLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="BRD/FRD records saved"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - MetricDocumentsValue:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =34
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: =Text(CountRows(colRequirementDocuments))
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - MetricStories:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =110
+                              LayoutMinWidth: =150
+                              PaddingBottom: =14
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =14
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - MetricStoriesLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Story drafts"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - MetricStoriesValue:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =34
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: =Text(CountRows(colUserStories))
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - MetricCoverage:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =110
+                              LayoutMinWidth: =150
+                              PaddingBottom: =14
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =14
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - MetricCoverageLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Test-case drafts"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - MetricCoverageValue:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =34
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: =Text(CountRows(colTestCases))
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                  - DashboardTraceability:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =RGBA(224, 224, 224, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =10
+                        LayoutMinHeight: =180
+                        LayoutMinWidth: =260
+                        PaddingBottom: =18
+                        PaddingLeft: =18
+                        PaddingRight: =18
+                        PaddingTop: =18
+                        RadiusBottomLeft: =18
+                        RadiusBottomRight: =18
+                        RadiusTopLeft: =18
+                        RadiusTopRight: =18
+                      Children:
+                        - TraceabilityTitle:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(29, 29, 31, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =28
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =21
+                              Text: ="Requirements traceability"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - TraceabilityEmpty:
+                            Control: ModernText
+                            Properties:
+                              AutoHeight: =true
+                              Color: =RGBA(122, 122, 122, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =48
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: |-
+                                =If(
+                                  CountRows(colRequirementDocuments) = 0,
+                                  "No requirements have been saved on this device yet.",
+                                  "LOCAL REQUIREMENTS (" & CountRows(colRequirementDocuments) & ")" & Char(10) &
+                                  Concat(
+                                    FirstN(colRequirementDocuments, 5),
+                                    ProjectName & " — " & SourceType & Char(10)
+                                  ) &
+                                  Char(10) & "Generated stories: " & CountRows(colUserStories) &
+                                  " | Test-case drafts: " & CountRows(colTestCases) &
+                                  " | Jira drafts not sent: " & CountRows(colJiraDrafts)
+                                )
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - OpenPowerBI:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open embedded Power BI report when configured"
+                              Appearance: =ButtonAppearance.Secondary
+                              BasePaletteColor: =RGBA(0, 102, 204, 1)
+                              Height: =38
+                              OnSelect: =Notify("Provide a Power BI workspace and report ID, then connect the Power BI control.", NotificationType.Information)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Power BI setup"
+                              Width: =140

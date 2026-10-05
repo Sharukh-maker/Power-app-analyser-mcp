@@ -1,0 +1,204 @@
+Screens:
+  Login:
+    Properties:
+      Fill: =RGBA(31, 48, 86, 1)
+      LoadingSpinnerColor: =RGBA(21, 101, 192, 1)
+    Children:
+      - LoginPage:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(31, 48, 86, 1)
+            Height: =Parent.Height
+            Width: =Parent.Width
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =400
+            LayoutMinWidth: =300
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            PaddingBottom: =24
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =24
+          Children:
+            - LoginBrand:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Height: =48
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutGap: =10
+                  LayoutJustifyContent: =LayoutJustifyContent.Center
+                  LayoutMinHeight: =48
+                  LayoutMinWidth: =220
+                Children:
+                  - LoginBrandMark:
+                      Control: Text
+                      Properties:
+                        Align: =Align.Center
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontColor: =RGBA(21, 101, 192, 1)
+                        Height: =36
+                        Size: =16
+                        Text: ="B"
+                        Weight: =FontWeight.Bold
+                        Width: =36
+                  - LoginBrandName:
+                      Control: Text
+                      Properties:
+                        FontColor: =RGBA(255, 255, 255, 1)
+                        Height: =32
+                        Size: =16
+                        Text: ="Business Dashboard"
+                        Weight: =FontWeight.Semibold
+                        Width: =190
+            - LoginCard:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =0
+                  Height: =If(App.Width < 480, 480, 500)
+                  Width: =Min(440, Parent.Width - 32)
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =14
+                  LayoutMinHeight: =460
+                  LayoutMinWidth: =280
+                  PaddingBottom: =28
+                  PaddingLeft: =If(App.Width < 480, 22, 36)
+                  PaddingRight: =If(App.Width < 480, 22, 36)
+                  PaddingTop: =28
+                  RadiusBottomLeft: =20
+                  RadiusBottomRight: =20
+                  RadiusTopLeft: =20
+                  RadiusTopRight: =20
+                  DropShadow: =DropShadow.Bold
+                Children:
+                  - LoginAvatar:
+                      Control: ModernAvatar
+                      Properties:
+                        AccessibleLabel: ="Business Dashboard sign-in"
+                        Appearance: =AvatarColor.Blue
+                        Height: =72
+                        Name: ="BD"
+                        Shape: =AvatarShape.Circular
+                        Width: =72
+                  - LoginTitle:
+                      Control: Text
+                      Properties:
+                        Align: =Align.Center
+                        FontColor: =RGBA(31, 41, 55, 1)
+                        Height: =32
+                        Size: =22
+                        Text: ="Welcome back"
+                        Weight: =FontWeight.Bold
+                        Width: =Parent.Width
+                  - LoginSubtitle:
+                      Control: Text
+                      Properties:
+                        Align: =Align.Center
+                        FontColor: =RGBA(107, 114, 128, 1)
+                        Height: =22
+                        Size: =12
+                        Text: ="Sign in to continue to your workspace"
+                        Width: =Parent.Width
+                  - EmailLabel:
+                      Control: Text
+                      Properties:
+                        FontColor: =RGBA(31, 41, 55, 1)
+                        Height: =22
+                        Size: =12
+                        Text: ="Email address"
+                        Weight: =FontWeight.Semibold
+                        Width: =Parent.Width
+                  - LoginEmail:
+                      Control: ModernTextInput
+                      Properties:
+                        AccessibleLabel: ="Email address"
+                        Appearance: =Appearance.Outline
+                        Default: =""
+                        Height: =44
+                        Placeholder: ="name@company.com"
+                        Type: =TextInputType.SingleLine
+                        Width: =Parent.Width
+                  - PasswordLabel:
+                      Control: Text
+                      Properties:
+                        FontColor: =RGBA(31, 41, 55, 1)
+                        Height: =22
+                        Size: =12
+                        Text: ="Password"
+                        Weight: =FontWeight.Semibold
+                        Width: =Parent.Width
+                  - LoginPassword:
+                      Control: ModernTextInput
+                      Properties:
+                        AccessibleLabel: ="Password"
+                        Appearance: =Appearance.Outline
+                        Default: =""
+                        Height: =44
+                        Placeholder: ="Enter your password"
+                        Type: =TextInputType.Password
+                        Width: =Parent.Width
+                  - LoginOptions:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =38
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =36
+                        LayoutMinWidth: =220
+                      Children:
+                        - RememberMe:
+                            Control: ModernCheckbox
+                            Properties:
+                              AccessibleLabel: ="Remember me on this device"
+                              Default: =true
+                              Height: =32
+                              Label: ="Remember me"
+                              Size: =11
+                              Width: =150
+                        - ForgotPassword:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Password help"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =32
+                              OnSelect: =Notify("Password recovery is managed by your organization. Use your organization's account recovery process.", NotificationType.Information)
+                              Text: ="Forgot password?"
+                              Width: =150
+                  - LoginButton:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Validate sign-in details"
+                        Appearance: =ButtonAppearance.Primary
+                        Height: =46
+                        OnSelect: '=If(IsBlank(Trim(LoginEmail.Text)) || IsBlank(Trim(LoginPassword.Text)), Notify("Enter your email address and password to continue.", NotificationType.Error), Notify("This app does not have a separate sign-in service configured. Authenticate through your organization''s Power Apps sign-in.", NotificationType.Warning))'
+                        Text: ="Sign in"
+                        Width: =Parent.Width
+                  - LoginHelpText:
+                      Control: Text
+                      Properties:
+                        Align: =Align.Center
+                        AutoHeight: =true
+                        FontColor: =RGBA(107, 114, 128, 1)
+                        Height: =38
+                        Size: =10
+                        Text: ="Your organization manages authentication and password recovery."
+                        Width: =Parent.Width
+            - LoginFooter:
+                Control: Text
+                Properties:
+                  Align: =Align.Center
+                  FontColor: =RGBA(219, 228, 242, 1)
+                  Height: =24
+                  Size: =10
+                  Text: ="© 2026 Business Dashboard"
+                  Width: =Parent.Width

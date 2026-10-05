@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Requirement Analyzer - portal prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#17233a;--mut:#5b667a;--line:#dde1e8;--acc:#0e7a6b;--on:#fff;--accbg:#e2f3f0;--warn:#a45305;--warnbg:#fdf0dc;--jira:#2860c8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#182236;--ink:#e8ecf3;--mut:#9aa6ba;--line:#2a3650;--acc:#4fc9b6;--on:#0b1a1a;--accbg:#123a3a;--warn:#f0b35c;--warnbg:#3a2c12;--jira:#7aa2f7}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#182236;--ink:#e8ecf3;--mut:#9aa6ba;--line:#2a3650;--acc:#4fc9b6;--on:#0b1a1a;--accbg:#123a3a;--warn:#f0b35c;--warnbg:#3a2c12;--jira:#7aa2f7}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+aside{background:var(--card);border-right:1px solid var(--line);padding:20px 14px}
+.brand{font-weight:600;font-size:17px;line-height:1.25;margin:0 8px 2px}
+.sub{color:var(--mut);font-size:13px;margin:0 8px 16px}
+#nav{display:flex;flex-direction:column;gap:4px}
+#nav button{display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:8px;padding:9px 10px;text-align:left}
+#nav button.on{background:var(--accbg);color:var(--acc);font-weight:600}
+#nav i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-size:12px;flex:none}
+main{padding:28px;max-width:940px;width:100%}
+h1{font-size:24px;margin:0 0 4px}
+h2{font-size:16px;margin:0 0 8px}
+.m{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.chip{background:none;border:1px solid var(--line);border-radius:99px;padding:5px 14px}
+.chip.on{background:var(--accbg);border-color:var(--acc);color:var(--acc);font-weight:600}
+.drop{display:block;border:1.5px dashed var(--line);border-radius:10px;padding:22px;text-align:center;font-weight:500;margin-bottom:14px}
+.drop span{display:block;font-weight:400;color:var(--mut);font-size:13px}
+select,input[type=number]{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.pri{background:var(--acc);color:var(--on);border:0;border-radius:8px;padding:10px 18px;font-weight:600}
+.pri:disabled{opacity:.45;cursor:not-allowed}
+.sec{background:none;border:1px solid var(--line);border-radius:8px;padding:9px 16px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{background:none;border:0;padding:8px 12px;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button.on{border-color:var(--acc);color:var(--acc);font-weight:600}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc)}
+.tag{font-size:12px;border-radius:6px;padding:1px 8px;background:var(--accbg);color:var(--acc);white-space:nowrap}
+.tag.j{background:none;border:1px solid var(--line);color:var(--jira)}
+ul{margin:6px 0 0;padding-left:18px;color:var(--mut)}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:8px 0}
+.bar b{display:block;height:100%;background:var(--acc)}
+.bar.o b{background:var(--warn)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:500}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
+.kp .card{margin:0}
+.kp b{font-size:28px;display:block;line-height:1.2}
+.bt{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#prog{margin-top:14px;color:var(--mut)}
+#t{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90%}
+#t.s{opacity:1}
+@media(max-width:720px){.app{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line);padding:12px}.sub{display:none}#nav{flex-direction:row;overflow-x:auto}#nav button{white-space:nowrap}main{padding:16px}}
+textarea{width:100%;font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:4px}
+summary{cursor:pointer}details ul{margin-bottom:8px}
+</style></head>
+<body>
+<div class="app">
+<aside><p class="brand">Requirement Analyzer</p><p class="sub">Power Apps portal. Clickable prototype with sample data.</p><nav id="nav"></nav></aside>
+<main id="main"></main>
+</div>
+<div id="t" role="status"></div>
+<script>
+const $=s=>document.querySelector(s);
+const SAMPLE=`The supplier must upload invoices as PDF or XML.
+The AP clerk shall approve or reject each invoice with a reason.
+The finance manager should see overdue approvals on a dashboard.
+The system must send email notifications quickly.
+Users need an easy way to export reports.`;
+const P=[{"n":1,"t":"Architecture and security","s":["Create Dev, Test and Prod environments and one unmanaged solution in Dev.","Create security roles for BA, QA, PM and Admin, each tied to an Entra ID group.","Store the Azure OpenAI key and Jira API token in Azure Key Vault.","Create secret environment variables that point to the Key Vault entries."],"l":"Secrets live only in Key Vault-backed environment variables and are read at run time, never hard-coded. A user sees a project's rows only if they belong to that project's owner team."},{"n":2,"t":"SharePoint and Dataverse setup","s":["Create the tables in section 7 with autonumber IDs and choice columns for status, severity and source type.","Add lookups: Story to Requirement, Criterion to Story, Test Case to Story, Risk to Story.","Create a SharePoint library for uploaded source files and save its link on the Source Document row.","Add a business rule that blocks Approved = Yes while the story text, story points or criteria are empty."],"l":"A story can be approved only when it has text, points and at least one acceptance criterion. The push flow checks the same rule again, so approval cannot be bypassed."},{"n":3,"t":"Power Apps UI","s":["Build four screens: Upload, Review, Jira and sprint, Dashboard.","Keep the current document in a variable (varDoc) and reuse one story-card component.","Use a Timer on the Upload screen to poll the document status while the analysis runs.","Wrap every Patch and flow call in IfError so failures show a clear message."],"l":"Navigate to Review only when varDoc.Status = 'Ready for review'. Until then poll every few seconds: Set(varDoc, LookUp('Source Documents', 'Source Document' = varDoc.'Source Document'))."},{"n":4,"t":"Power Automate flows","s":["Build Flow 1 (Analyze document), Flow 2 (Push to Jira) and Flow 3 (Sync status) as in Appendix B.","Move the Jira call into a child flow so create-epic and create-story share one error path.","Add run-after branches that set Status = Failed and save the error text on any failed action.","Limit Apply to each concurrency so Jira and Azure OpenAI rate limits are not hit."],"l":"Every flow has a success path and a failure path. A failure never leaves a document stuck in Analyzing: the failure branch always writes Status = Failed and the message."},{"n":5,"t":"Azure OpenAI integration","s":["Deploy a chat model in an approved region and note the endpoint and deployment name.","Write the system prompt and JSON schema in Appendix E and keep temperature low.","Split long text by heading, call the model per chunk, then merge the results.","Validate the response with Parse JSON, check required fields, retry once, then fail."],"l":"Pipeline: chunk, extract requirements, draft stories and criteria, draft tests and risks, merge, validate. A response that does not parse or misses required fields is retried once with the error appended to the prompt, then marked Failed."},{"n":6,"t":"Jira REST API integration","s":["Create a service account and API token; store them as environment variables.","Create the epic with POST /rest/api/2/issue, then each story with the epic as parent.","Map fields per project from the Field Mapping column on the Project row.","Write each returned Jira key back to the story and log the request and response."],"l":"Push only stories where Approved = Yes and Jira Key is empty, so re-running the flow never creates duplicates. On HTTP 429, wait for the Retry-After value and try again."},{"n":7,"t":"Power BI","s":["Connect the report to Dataverse and model the relationships between the tables.","Build measures for approval rate, test coverage and time from upload to Jira.","Add an RTM table with requirement, story, tests and Jira key.","Embed the report in the Dashboard screen and filter it by the selected project."],"l":"Approval Rate = DIVIDE(CALCULATE(COUNTROWS('User Story'), 'User Story'[Approved] = TRUE()), COUNTROWS('User Story')). Test Coverage = DIVIDE(DISTINCTCOUNT('Test Case'[Story ID]), COUNTROWS('User Story')). Adjust names to your model."},{"n":8,"t":"UAT","s":["Build a golden set of real, anonymized documents with BA-approved stories.","Test the happy path, a very long document, malformed AI output, Jira rate limiting and role permissions.","Compare generated stories with the golden set for missed and invented requirements.","Fix defects and tune prompts, then re-run the golden set."],"l":"Exit rule: no requirement in the golden set is missed without being flagged as a risk, no invented requirement reaches Jira unreviewed, and every role sees only what it should."},{"n":9,"t":"Production deployment","s":["Export the solution as managed and deploy through a pipeline from Test to Prod.","Set connection references and environment variables for Prod.","Apply the data loss prevention policy and confirm the licences are in place.","Set alerts for failed flow runs, train the users and hand over the runbook."],"l":"Keep the previous managed solution version and prompt version so a bad release can be rolled back in one step."}];
+let S=[],T=[],R=[];
+const esc=x=>x.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=x=>x[0].toUpperCase()+x.slice(1);
+function analyze(txt){S=[];T=[];R=[];
+txt.split(/\n+|\.\s+/).map(x=>x.trim()).filter(Boolean).forEach(x=>{
+const m=x.match(/^(?:the\s+)?(.+?)\s+(?:must|shall|should|will|needs?(?: to)?|can)\s+(?:be able to\s+)?(.+?)[.!?]?$/i);if(!m)return;
+const n=S.length+1,id='US-'+(100+n);let role=esc(/^[A-Z]{2,}/.test(m[1])?m[1]:m[1].toLowerCase()),act=esc(m[2]).replace(/^an?\s+\w*\s*way to\s+/i,'');
+const sys=/system|application|portal/.test(role);if(!sys)role=role.replace(/s$/,'');
+const w=act.split(/\s+/).length;
+S.push({id,k:cap(act).slice(0,40),t:sys?'As a business user, I need the system to '+act+'.':'As '+(/^(?!us|uni|eu)[aeiou]/i.test(role)?'an ':'a ')+role+', I can '+act+'.',ac:['A valid request to '+act+' succeeds','Invalid input shows a clear error message','The action is logged with user and time'],p:w<=6?3:w<=9?5:8});
+T.push(['TC-'+id.slice(3)+'-1',id,'Happy path: '+act+'. Expect success.'],['TC-'+id.slice(3)+'-2',id,'Invalid input. Expect a clear error.']);
+const v=act.match(/\b(quick(ly)?|fast|easy|easily|user-friendly|etc|as needed|appropriate|flexible|intuitive|soon)\b/i);
+if(v)R.push(id+': "'+v[0]+'" is not measurable. Agree a target with the business owner.');
+const d=act.match(/\b(email|notification|integration|api|export|sap|sso)\b/i);
+if(d)R.push(id+': depends on '+d[1].toLowerCase()+'. Confirm it is available.');
+})}
+const V=[['up','Upload'],['rv','Review'],['jr','Jira and sprint'],['db','Dashboard'],['hb','How it is built']];
+const st={v:'up',src:'BRD',txt:SAMPLE,done:false,tab:'st',ap:[],pushed:false,cap:13,sync:false};
+const ap=id=>st.ap.includes(id);
+const A=()=>S.filter(s=>ap(s.id));
+const pts=()=>A().reduce((a,s)=>a+s.p,0);
+const key=s=>'SUP-'+(41+A().indexOf(s));
+function toast(m){const t=$('#t');t.textContent=m;t.className='s';setTimeout(()=>t.className='',2400)}
+function go(v){if(v!='up'&&v!='hb'&&!st.done)return toast('Analyze a document first');st.v=v;draw()}
+function tog(id){st.ap=ap(id)?st.ap.filter(x=>x!=id):[...st.ap,id];draw()}
+function push(){st.pushed=true;st.sync=false;go('jr');toast(st.ap.length+' stories pushed to Jira')}
+function run(){
+const steps=['Reading document','Extracting requirements','Drafting stories and criteria','Generating tests, risks and estimates'];
+st.txt=$('#txt').value;$('#go').disabled=true;let i=0;
+const tick=()=>{$('#prog').innerHTML=steps.slice(0,i+1).map((s,j)=>'<div>'+(j<i?'Done: ':'Working: ')+s+'</div>').join('');
+if(i++<steps.length-1)setTimeout(tick,600);else setTimeout(()=>{analyze(st.txt);if(!S.length){toast('No requirements found. Use words like must, shall or should.');draw();return}st.done=true;st.ap=[];st.pushed=false;st.tab='st';go('rv');toast(S.length+' stories drafted. Review before pushing.')},700)};
+tick()}
+const views={
+up:()=>`<h1>Add requirements</h1><p class="m">Upload a document or paste notes. The analyzer drafts stories, criteria, tests, risks and estimates for you to review.</p>
+<div class="card"><b>Source type</b><div class="chips">${['BRD','FRD','Email','Meeting notes'].map(s=>`<button class="chip ${st.src==s?'on':''}" onclick="st.txt=$('#txt').value;st.src='${s}';draw()">${s}</button>`).join('')}</div>
+<label class="drop">Drop a file here<span>In Power Apps this is the Attachments control. Text extraction is simulated in this prototype.</span></label><label>Requirement text<textarea id="txt" rows="7">${esc(st.txt)}</textarea></label><p class="m" style="margin:6px 0 14px">In production, Azure OpenAI reads this text. This prototype uses simple rules so you can try your own sentences.</p>
+<p><label>Project <select><option>Supplier Portal</option><option>Claims Intake</option></select></label></p>
+<button class="pri" id="go" onclick="run()">Analyze requirements</button><div id="prog"></div></div>`,
+rv:()=>{const tabs=[['st','Stories'],['tc','Test cases'],['rk','Risks and estimates']];let b='';
+if(st.tab=='st')b=S.map(s=>`<div class="card"><div class="row"><input type="checkbox" aria-label="Approve ${s.id}" ${ap(s.id)?'checked':''} onchange="tog('${s.id}')"><div style="flex:1"><b>${s.id}</b> ${s.t}<ul>${s.ac.map(a=>'<li>'+a+'</li>').join('')}</ul></div><span class="tag">${s.p} pts</span></div></div>`).join('');
+if(st.tab=='tc')b=`<div class="card tw"><table><tr><th>Test case<th>Covers<th>Steps</tr>${T.map(t=>`<tr><td>${t[0]}<td>${t[1]}<td>${t[2]}</tr>`).join('')}</table></div>`;
+if(st.tab=='rk')b=`<div class="card"><h2>Risks and open questions</h2><ul>${R.length?R.map(r=>'<li>'+r+'</li>').join(''):'<li>No risks flagged.</li>'}</ul></div><div class="card"><h2>Estimate</h2>${S.reduce((a,s)=>a+s.p,0)} story points across ${S.length} stories. Review each estimate with the team before sprint planning.</div>`;
+return `<h1>Review generated artifacts</h1><p class="m">Nothing goes to Jira until you approve it.</p><div class="tabs">${tabs.map(t=>`<button class="${st.tab==t[0]?'on':''}" onclick="st.tab='${t[0]}';draw()">${t[1]}</button>`).join('')}</div>${b}
+<div class="card bt"><span>${st.ap.length} of ${S.length} stories approved (${pts()} points)</span><span><button class="sec" onclick="st.ap=S.map(s=>s.id);draw()">Approve all</button> <button class="pri" ${st.ap.length?'':'disabled'} onclick="push()">Push approved to Jira</button></span></div>`},
+jr:()=>{if(!st.pushed)return `<h1>Jira and sprint</h1><div class="card">Nothing pushed yet. Approve stories in Review, then push them to Jira.<br><br><button class="sec" onclick="go('rv')">Go to Review</button></div>`;
+const a=A(),over=pts()>st.cap,pc=Math.min(100,pts()/st.cap*100);
+return `<h1>Jira and sprint</h1><p class="m">Issues created through the Jira REST API. Status syncs back into this app.</p>
+<div class="card tw"><div class="bt"><h2>Issues created</h2><button class="sec" onclick="st.sync=true;draw();toast('Status synced from Jira')">Sync status from Jira</button></div>
+<table><tr><th>Key<th>Type<th>Summary<th>Status</tr><tr><td>SUP-40<td>Epic<td>Invoice intake and approval<td><span class="tag j">To Do</span></tr>
+${a.map((s,i)=>`<tr><td>${key(s)}<td>Story<td>${s.k}<td><span class="tag j">${st.sync&&i==0?'In Progress':'To Do'}</span></tr>`).join('')}</table></div>
+<div class="card"><h2>Sprint 1 planning</h2><label>Team capacity (points) <input type="number" min="1" value="${st.cap}" onchange="st.cap=+this.value||1;draw()"></label>
+<div class="bar ${over?'o':''}"><b style="width:${pc}%"></b></div>
+<div>${pts()} points committed. ${over?'Over capacity by '+(pts()-st.cap)+' points. Move a story to the next sprint.':(st.cap-pts())+' points still free.'}</div></div>`},
+db:()=>{const n=st.pushed?st.ap.length:0;
+return `<h1>Tracking dashboard</h1><p class="m">In production this page is a Power BI report embedded in the app.</p>
+<div class="kp"><div class="card"><b>1</b>Documents analyzed</div><div class="card"><b>${S.length}</b>Stories drafted</div><div class="card"><b>${st.ap.length}</b>Stories approved</div><div class="card"><b>${n}</b>Issues in Jira</div></div>
+<div class="card tw"><h2>Requirements traceability matrix</h2><table><tr><th>Requirement<th>Story<th>Tests<th>Jira</tr>
+${S.map((s,i)=>`<tr><td>REQ-0${i+1}<td>${s.id} ${s.k}<td>${T.filter(t=>t[1]==s.id).length}<td>${st.pushed&&ap(s.id)?key(s):'Not pushed'}</tr>`).join('')}</table></div>`},
+hb:()=>`<h1>How it is built</h1><p class="m">Nine phases and the key rule behind each. Full detail is in the proposal appendix.</p>${P.map(p=>`<details class="card"><summary><b>Phase ${p.n}: ${p.t}</b></summary><ul>${p.s.map(x=>'<li>'+x+'</li>').join('')}</ul><p><b>Logic:</b> ${p.l}</p></details>`).join('')}`};
+function draw(){$('#nav').innerHTML=V.map((x,i)=>`<button class="${st.v==x[0]?'on':''}" onclick="go('${x[0]}')"><i>${i+1}</i>${x[1]}</button>`).join('');$('#main').innerHTML=views[st.v]()}
+draw();
+</script></body></html>

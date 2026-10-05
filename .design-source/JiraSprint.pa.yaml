@@ -1,0 +1,692 @@
+Screens:
+  JiraSprint:
+    Properties:
+      Fill: =varCanvasFill
+      LoadingSpinnerColor: =varBrandBlue
+    Children:
+      - JiraShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =varCanvasFill
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            Width: =Parent.Width
+            LayoutGap: =0
+            LayoutOverflowX: =LayoutOverflow.Hide
+          Children:
+            - JiraSprintSidebar:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varSidebarFill
+                  FillPortions: =0
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =20
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 0, 232)
+                  PaddingBottom: =20
+                  PaddingLeft: =16
+                  PaddingRight: =16
+                  PaddingTop: =18
+                  Visible: =App.Width >= 720
+                  Width: =If(App.Width < 720, 0, 232)
+                Children:
+                  - JiraSprintSidebarBrand:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        FillPortions: =0
+                        Height: =60
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =56
+                        LayoutMinWidth: =200
+                      Children:
+                        - JiraSprintSidebarBrandBadge:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer logo"
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =varBrandBlue
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =36
+                              LayoutMinWidth: =36
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                              Size: =15
+                              Text: ="AI"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =36
+                        - JiraSprintSidebarBrandName:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer"
+                              Color: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =42
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =14
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =Parent.Width - 52
+                  - JiraSprintSidebarNavigation:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =8
+                        LayoutMinHeight: =240
+                        LayoutMinWidth: =196
+                      Children:
+                        - JiraSprintSidebarUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Upload requirements"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="ArrowUpload"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Upload requirements"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                        - JiraSprintSidebarReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Review stories"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="CheckmarkCircle"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Review stories"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                        - JiraSprintSidebarJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Jira & sprint"
+                              Appearance: =ButtonAppearance.Primary
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="Link"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Jira & sprint"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                        - JiraSprintSidebarDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="DataBarVertical"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Dashboard"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+            - JiraSprintMain:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varCanvasFill
+                  FillPortions: =1
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =0
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 280, 480)
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  Width: =Parent.Width
+                Children:
+                  - JiraSprintHeader:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =varBorderColor
+                        BorderThickness: =1
+                        Fill: =varCardFill
+                        FillPortions: =0
+                        Height: =76
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =68
+                        LayoutMinWidth: =260
+                        PaddingBottom: =10
+                        PaddingLeft: =If(App.Width < 720, 16, 24)
+                        PaddingRight: =If(App.Width < 720, 16, 24)
+                        PaddingTop: =10
+                        Width: =Parent.Width
+                      Children:
+                        - JiraHeaderTitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="Jira & sprint page heading"
+                              Color: =varTextPrimary
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =40
+                              LayoutMinWidth: =120
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =If(App.Width < 480, 15, 18)
+                              Text: ="Jira & sprint"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =If(App.Width < 520, Parent.Width - 70, Parent.Width - 320)
+                        - JiraSprintHeaderUserIdentity:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =54
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =10
+                              LayoutMinHeight: =48
+                              LayoutMinWidth: =140
+                            Children:
+                              - JiraSprintHeaderUserText:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =48
+                                    LayoutAlignItems: =LayoutAlignItems.End
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =0
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =If(App.Width < 640, 0, 160)
+                                    Visible: =App.Width >= 640
+                                    Width: =If(App.Width < 640, 0, 250)
+                                  Children:
+                                    - JiraSprintHeaderUserName:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user name"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =24
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =User().FullName
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                                    - JiraSprintHeaderUserEmail:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user email"
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =20
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: =User().Email
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                              - JiraSprintHeaderUserAvatar:
+                                  Control: ModernAvatar
+                                  Properties:
+                                    AccessibleLabel: ="Current user profile image"
+                                    Appearance: =AvatarColor.Brand
+                                    Image: =User().Image
+                                    Name: =User().FullName
+                                    Height: =42
+                                    Shape: =AvatarShape.Circular
+                                    Tooltip: =User().FullName
+                                    Width: =42
+                  - JiraNav:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        FillPortions: =0
+                        Height: =If(App.Width < 440, 104, 64)
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =8
+                        LayoutMinHeight: =If(App.Width < 440, 104, 64)
+                        LayoutMinWidth: =280
+                        LayoutWrap: =true
+                        PaddingLeft: =16
+                        PaddingRight: =16
+                        Visible: =App.Width < 720
+                      Children:
+                        - JiraBrandBadge:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="jira brand badge"
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =varBrandBlue
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =13
+                              Text: ="AI"
+                              VerticalAlign: =VerticalAlign.Top
+                              Visible: =App.Width >= 900
+                              Width: =32
+                        - JiraBrand:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="jira brand"
+                              Color: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =36
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =17
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Top
+                              Visible: =App.Width >= 900
+                              Width: =210
+                        - JiraNavUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open upload requirements"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="ArrowUpload"
+                              OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Upload"
+                              Width: =If(App.Width < 720, 88, 100)
+                        - JiraNavReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open review artifacts"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="CheckmarkCircle"
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Review"
+                              Width: =If(App.Width < 720, 84, 100)
+                        - JiraNavCurrent:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Jira and sprint, current page"
+                              BasePaletteColor: =varBrandBlue
+                              Height: =40
+                              Icon: ="Link"
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Jira & sprint"
+                              Width: =If(App.Width < 720, 112, 124)
+                        - JiraNavDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="DataBarVertical"
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Dashboard"
+                              Width: =If(App.Width < 720, 96, 116)
+                  - JiraContent:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =16
+                        LayoutMinHeight: =300
+                        LayoutMinWidth: =280
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                        PaddingBottom: =24
+                        PaddingLeft: =If(App.Width < 720, 16, 28)
+                        PaddingRight: =If(App.Width < 720, 16, 28)
+                        PaddingTop: =22
+                        FillPortions: =1
+                        Width: =Parent.Width
+                      Children:
+                        - JiraTitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="jira title"
+                              AutoHeight: =true
+                              Color: =varTextPrimary
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =46
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =34
+                              Text: ="Jira and sprint"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - JiraSubtitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="jira subtitle"
+                              Color: =varTextSecondary
+                              Font: =Font.'Segoe UI'
+                              Height: =26
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="Push only approved stories, then sync issue status and plan team capacity."
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - JiraSetupCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =varBorderColor
+                              BorderThickness: =1
+                              Fill: =varCardFill
+                              FillPortions: =0
+                              Height: =142
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =10
+                              LayoutMinHeight: =132
+                              LayoutMinWidth: =260
+                              PaddingBottom: =18
+                              PaddingLeft: =18
+                              PaddingRight: =18
+                              PaddingTop: =18
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - JiraSetupTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="jira setup title"
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =26
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =17
+                                    Text: ="Jira connection required"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - JiraSetupText:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="jira setup text"
+                                    AutoHeight: =true
+                                    Color: =varTextSecondary
+                                    Font: =Font.'Segoe UI'
+                                    Height: =60
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="This offline app can prepare local Jira issue drafts only. To create or sync live Jira issues, connect a Jira project and a secured Power Automate flow; never put Jira credentials in app formulas."
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - JiraIssuesCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =varBorderColor
+                              BorderThickness: =1
+                              Fill: =varCardFill
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =10
+                              LayoutMinHeight: =230
+                              LayoutMinWidth: =260
+                              PaddingBottom: =18
+                              PaddingLeft: =18
+                              PaddingRight: =18
+                              PaddingTop: =18
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - JiraIssuesTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="jira issues title"
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =28
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: ="Jira issue drafts"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - JiraIssuesEmpty:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="jira issues empty"
+                                    AutoHeight: =true
+                                    Color: =varTextSecondary
+                                    Font: =Font.'Segoe UI'
+                                    Height: =48
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: "=If(\n  CountRows(colJiraDrafts) = 0,\n  \"No local issue drafts yet. Approve stories on Review, then create drafts here. Drafts are not sent to Jira.\",\n  \"LOCAL DRAFTS — NOT SENT TO JIRA (\" & CountRows(colJiraDrafts) & \")\" & Char(10) &\n  Concat(FirstN(colJiraDrafts, 4), Summary & Char(10))\n)"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - QueueApprovedStories:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Create local Jira issue drafts from approved stories"
+                                    BasePaletteColor: =varBrandBlue
+                                    Height: =40
+                                    OnSelect: "=If(\n  CountRows(Filter(colUserStories, ApprovalStatus = \"Approved\")) = 0,\n  Notify(\"Approve local story drafts on the Review screen first.\", NotificationType.Information),\n  Collect(\n    colJiraDrafts,\n    ForAll(\n      Filter(\n        colUserStories As approvedStory,\n        approvedStory.ApprovalStatus = \"Approved\" &&\n        IsBlank(LookUp(colJiraDrafts, StoryId = approvedStory.StoryId))\n      ),\n      {\n        DraftId: Text(GUID()),\n        StoryId: StoryId,\n        Summary: Left(StoryText, 255),\n        Description: AcceptanceCriteria,\n        Status: \"Not sent to Jira\",\n        CreatedOn: Now()\n      }\n    )\n  );\n  IfError(\n    SaveData(colJiraDrafts, \"AIRequirementAnalyzerJiraDrafts\");\n    Notify(\"Local Jira issue drafts saved on this device. No Jira connection is configured, so nothing was sent.\", NotificationType.Success),\n    Notify(\"Jira drafts were created for this session but could not be saved\
+                                      \ on this device. Open Power Apps Mobile or Windows for local persistence.\", NotificationType.Warning)\n  )\n)"
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Create Jira drafts"
+                                    Width: =180
+                              - SyncJiraStatus:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Sync Jira issue status"
+                                    Appearance: =ButtonAppearance.Secondary
+                                    BasePaletteColor: =varBrandBlue
+                                    Height: =38
+                                    OnSelect: =Notify("Live Jira sync is unavailable until a Jira connector and secured sync flow are configured.", NotificationType.Information)
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Sync status"
+                                    Width: =130
+                        - SprintCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =varBorderColor
+                              BorderThickness: =1
+                              Fill: =varCardFill
+                              FillPortions: =0
+                              Height: =124
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =116
+                              LayoutMinWidth: =260
+                              PaddingBottom: =16
+                              PaddingLeft: =18
+                              PaddingRight: =18
+                              PaddingTop: =16
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - SprintTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="sprint title"
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =26
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: ="Sprint planning"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - SprintEmpty:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="sprint empty"
+                                    AutoHeight: =true
+                                    Color: =varTextSecondary
+                                    Font: =Font.'Segoe UI'
+                                    Height: =48
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Capacity planning becomes available after analyzed stories, estimates, and team capacity are stored."
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width

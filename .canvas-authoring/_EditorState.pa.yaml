@@ -1,3 +1,27 @@
 EditorState:
   ScreensOrder:
-    - Screen1
+    - Login
+    - Dashboard
+    - Analytics
+    - AnalyticsOverview
+    - AnalyticsReports
+    - AnalyticsPerformance
+    - Users
+    - AllUsers
+    - AddUser
+    - UserRoles
+    - Products
+    - AllProducts
+    - AddProduct
+    - Categories
+    - Orders
+    - AllOrders
+    - PendingOrders
+    - CompletedOrders
+    - Messages
+    - Notifications
+    - Settings
+    - Profile
+    - Security
+    - Preferences
+    - HelpSupport

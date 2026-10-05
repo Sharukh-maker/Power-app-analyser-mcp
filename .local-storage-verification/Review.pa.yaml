@@ -1,0 +1,517 @@
+Screens:
+  Review:
+    Properties:
+      Fill: =RGBA(245, 245, 247, 1)
+      LoadingSpinnerColor: =RGBA(0, 102, 204, 1)
+    Children:
+      - ReviewShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(245, 245, 247, 1)
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            Width: =Parent.Width
+          Children:
+            - ReviewNav:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(0, 0, 0, 1)
+                  FillPortions: =0
+                  Height: =If(App.Width < 440, 104, 64)
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutGap: =8
+                  LayoutMinHeight: =If(App.Width < 440, 104, 64)
+                  LayoutMinWidth: =280
+                  LayoutWrap: =true
+                  PaddingLeft: =16
+                  PaddingRight: =16
+                Children:
+                  - ReviewBrandBadge:
+                      Control: ModernText
+                      Properties:
+                        Align: =Align.Center
+                        Color: =RGBA(255, 255, 255, 1)
+                        Fill: =RGBA(0, 102, 204, 1)
+                        FontWeight: =FontWeight.Bold
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =13
+                        Text: ="AI"
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =App.Width >= 900
+                        Width: =32
+                  - ReviewBrand:
+                      Control: ModernText
+                      Properties:
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =36
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =17
+                        Text: ="AI Requirement Analyzer"
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =App.Width >= 900
+                        Width: =210
+                  - ReviewNavUpload:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open upload requirements"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="ArrowUpload"
+                        OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Upload"
+                        Width: =If(App.Width < 720, 88, 100)
+                  - ReviewNavCurrent:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Review artifacts, current page"
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Height: =40
+                        Icon: ="CheckmarkCircle"
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Review"
+                        Width: =If(App.Width < 720, 84, 100)
+                  - ReviewNavJira:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open Jira and sprint"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="Link"
+                        OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Jira & sprint"
+                        Width: =If(App.Width < 720, 112, 124)
+                  - ReviewNavDashboard:
+                      Control: ModernButton
+                      Properties:
+                        AccessibleLabel: ="Open dashboard"
+                        Appearance: =ButtonAppearance.Subtle
+                        BasePaletteColor: =RGBA(0, 102, 204, 1)
+                        Color: =RGBA(255, 255, 255, 1)
+                        Height: =40
+                        Icon: ="DataBarVertical"
+                        OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                        RadiusBottomLeft: =999
+                        RadiusBottomRight: =999
+                        RadiusTopLeft: =999
+                        RadiusTopRight: =999
+                        Text: ="Dashboard"
+                        Width: =If(App.Width < 720, 96, 116)
+            - ReviewContent:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =14
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =280
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  PaddingBottom: =24
+                  PaddingLeft: =If(App.Width < 720, 16, 28)
+                  PaddingRight: =If(App.Width < 720, 16, 28)
+                  PaddingTop: =22
+                Children:
+                  - ReviewTitle:
+                      Control: ModernText
+                      Properties:
+                        AutoHeight: =true
+                        Color: =RGBA(29, 29, 31, 1)
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =46
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =34
+                        Text: ="Review generated artifacts"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                  - ReviewSubtitle:
+                      Control: ModernText
+                      Properties:
+                        Color: =RGBA(122, 122, 122, 1)
+                        Font: =Font.'Segoe UI'
+                        Height: =26
+                        LayoutMinWidth: =96
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =14
+                        Text: ="Review and approve stories, acceptance criteria, test cases, risks, and estimates before Jira."
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width
+                  - ReviewNotice:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(245, 245, 247, 1)
+                        FillPortions: =0
+                        Height: =86
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =80
+                        LayoutMinWidth: =260
+                        PaddingBottom: =14
+                        PaddingLeft: =16
+                        PaddingRight: =16
+                        PaddingTop: =14
+                        RadiusBottomLeft: =8
+                        RadiusBottomRight: =8
+                        RadiusTopLeft: =8
+                        RadiusTopRight: =8
+                      Children:
+                        - ReviewNoticeTitle:
+                            Control: ModernText
+                            Properties:
+                              Color: =RGBA(51, 51, 51, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =22
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="Offline template drafts"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - ReviewNoticeText:
+                            Control: ModernText
+                            Properties:
+                              AutoHeight: =true
+                              Color: =RGBA(51, 51, 51, 1)
+                              Font: =Font.'Segoe UI'
+                              Height: =34
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="These story and test drafts were created locally from each non-empty requirement line. They are not AI analysis; verify and edit them before use. Risks need manual review and estimates are not calculated."
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                  - ReviewSections:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutMinHeight: =300
+                        LayoutMinWidth: =260
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                        LayoutWrap: =true
+                      Children:
+                        - StoriesCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =160
+                              PaddingBottom: =16
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =16
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - StoriesTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =26
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: ="User stories & acceptance criteria"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - StoriesEmpty:
+                                  Control: ModernText
+                                  Properties:
+                                    AutoHeight: =true
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =If(App.Width < 480, 96, 48)
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: |-
+                                      =If(
+                                        CountRows(colUserStories) = 0,
+                                        "No local story drafts yet. Add requirement text on Upload.",
+                                        "LOCAL TEMPLATE DRAFTS (" & CountRows(colUserStories) & ")" & Char(10) &
+                                        Concat(
+                                          FirstN(colUserStories, 3),
+                                          "• " & StoryText & Char(10) & "Acceptance: " & AcceptanceCriteria & Char(10)
+                                        )
+                                      )
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - TestsCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =160
+                              PaddingBottom: =16
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =16
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - TestsTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =26
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: ="UAT test cases"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - TestsEmpty:
+                                  Control: ModernText
+                                  Properties:
+                                    AutoHeight: =true
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =48
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: |-
+                                      =If(
+                                        CountRows(colTestCases) = 0,
+                                        "No local test-case drafts yet. Add requirement text on Upload.",
+                                        "LOCAL TEST CASES (" & CountRows(colTestCases) & ")" & Char(10) &
+                                        Concat(
+                                          FirstN(colTestCases, 3),
+                                          Title & Char(10) & "Steps: " & Steps & Char(10) & "Expected: " & ExpectedResult & Char(10)
+                                        )
+                                      )
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - RisksCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =RGBA(224, 224, 224, 1)
+                              BorderThickness: =1
+                              Fill: =RGBA(255, 255, 255, 1)
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutMinHeight: =160
+                              PaddingBottom: =16
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =16
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                            Children:
+                              - RisksTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    Color: =RGBA(29, 29, 31, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =26
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =21
+                                    Text: ="Risks & estimates"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - RisksEmpty:
+                                  Control: ModernText
+                                  Properties:
+                                    AutoHeight: =true
+                                    Color: =RGBA(122, 122, 122, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =48
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: |-
+                                      =If(
+                                        CountRows(colRiskNotes) = 0,
+                                        "No risk prompts yet. Risks require human assessment; estimate points are left unassigned.",
+                                        "MANUAL RISK REVIEW (" & CountRows(colRiskNotes) & ")" & Char(10) &
+                                        Concat(
+                                          FirstN(colRiskNotes, 3),
+                                          "Requirement: " & RequirementExcerpt & Char(10) & ReviewPrompt & Char(10) & "Estimate: needs human review" & Char(10)
+                                        )
+                                      )
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                  - ReviewActions:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =48
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =If(App.Width < 480, 96, 48)
+                        LayoutMinWidth: =260
+                        LayoutWrap: =true
+                      Children:
+                        - BackToUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Return to requirement upload"
+                              Appearance: =ButtonAppearance.Secondary
+                              BasePaletteColor: =RGBA(0, 102, 204, 1)
+                              Height: =40
+                              OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Back to upload"
+                              Width: =136
+                        - ApproveStories:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Mark all local story drafts as approved for the Jira draft queue"
+                              BasePaletteColor: =RGBA(0, 102, 204, 1)
+                              Height: =40
+                              OnSelect: |-
+                                =If(
+                                  CountRows(colUserStories) = 0,
+                                  Notify("There are no local story drafts to approve.", NotificationType.Information),
+                                  UpdateIf(colUserStories, ApprovalStatus = "Draft", {ApprovalStatus: "Approved"});
+                                  IfError(
+                                    SaveData(colUserStories, "AIRequirementAnalyzerStories");
+                                    Notify("Local story drafts marked approved. This does not publish them to Jira.", NotificationType.Success),
+                                    Notify("Approvals changed for this session but could not be saved on this device. Open Power Apps Mobile or Windows for local persistence.", NotificationType.Warning)
+                                  )
+                                )
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Approve selected"
+                              Width: =160

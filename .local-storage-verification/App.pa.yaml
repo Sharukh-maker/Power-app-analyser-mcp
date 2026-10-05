@@ -1,0 +1,14 @@
+App:
+  Properties:
+    OnStart: |-
+      =IfError(
+        LoadData(colRequirementDocuments, "AIRequirementAnalyzerDocuments", true);
+        LoadData(colUserStories, "AIRequirementAnalyzerStories", true);
+        LoadData(colTestCases, "AIRequirementAnalyzerTests", true);
+        LoadData(colRiskNotes, "AIRequirementAnalyzerRisks", true);
+        LoadData(colJiraDrafts, "AIRequirementAnalyzerJiraDrafts", true);
+        Set(varLocalStorageAvailable, true),
+        Set(varLocalStorageAvailable, false);
+        Notify("Device-local restore is not supported in this player. Use Power Apps Mobile or Windows to keep data between sessions.", NotificationType.Warning)
+      )
+    Theme: =PowerAppsTheme

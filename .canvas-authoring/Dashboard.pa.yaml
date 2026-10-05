@@ -1,0 +1,1068 @@
+Screens:
+  Dashboard:
+    Properties:
+      Fill: =RGBA(245, 247, 250, 1)
+      LoadingSpinnerColor: =RGBA(21, 101, 192, 1)
+    Children:
+      - DBPageShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(245, 247, 250, 1)
+            Height: =Parent.Height
+            Width: =Parent.Width
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutGap: =0
+            LayoutMinWidth: =300
+          Children:
+            - DBSidebar:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(17, 31, 53, 1)
+                  FillPortions: =0
+                  Height: =Parent.Height
+                  Width: =If(App.Width < 720, 280, If(Coalesce(varSidebarCollapsed, false), 72, 252))
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =12
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 280, 72)
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  PaddingBottom: =16
+                  PaddingLeft: =10
+                  PaddingRight: =10
+                  PaddingTop: =16
+                  Visible: =App.Width >= 720 || Coalesce(varMobileDrawerOpen, false)
+                Children:
+                  - DBSidebarBrand:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =48
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =8
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =44
+                        LayoutMinWidth: =48
+                      Children:
+                        - DBBrandBadge:
+                            Control: Text
+                            Properties:
+                              Text: ="B"
+                              Align: =Align.Center
+                              Fill: =RGBA(21, 101, 192, 1)
+                              FontColor: =RGBA(255, 255, 255, 1)
+                              Height: =36
+                              Size: =16
+                              Weight: =FontWeight.Bold
+                              Width: =36
+                        - DBSidebarAppName:
+                            Control: Text
+                            Properties:
+                              Text: =If(Coalesce(varSidebarCollapsed, false), "", "Business Dashboard")
+                              FontColor: =RGBA(255, 255, 255, 1)
+                              Height: =32
+                              Size: =14
+                              Weight: =FontWeight.Semibold
+                              Width: =If(Coalesce(varSidebarCollapsed, false), 0, 160)
+                              Visible: =!Coalesce(varSidebarCollapsed, false)
+                        - DBCollapseSidebar:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: =If(App.Width < 720, "Close navigation drawer", "Collapse or expand navigation")
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              Icon: =If(App.Width < 720, "Dismiss", "PanelLeft")
+                              OnSelect: =If(App.Width < 720, Set(varMobileDrawerOpen, false), Set(varSidebarCollapsed, !Coalesce(varSidebarCollapsed, false)))
+                              Text: =If(App.Width < 720 || Coalesce(varSidebarCollapsed, false), "", "Collapse")
+                              Tooltip: =If(App.Width < 720, "Close navigation", "Collapse or expand sidebar")
+                              Visible: =App.Width < 720 || !Coalesce(varSidebarCollapsed, false)
+                              Width: =If(App.Width < 720 || !Coalesce(varSidebarCollapsed, false), 86, 36)
+                  - DBNavigationList:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =1
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =4
+                        LayoutMinHeight: =180
+                        LayoutMinWidth: =48
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                      Children:
+                        - DBNavDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Dashboard"
+                              Appearance: =ButtonAppearance.Primary
+                              Height: =36
+                              Icon: ="Home"
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              Text: =If(Coalesce(varSidebarCollapsed, false), "", "Dashboard")
+                              Tooltip: ="Dashboard"
+                              Width: =Parent.Width
+                        - DBAnalyticsNavRow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =36
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =2
+                              LayoutMinHeight: =36
+                              LayoutMinWidth: =48
+                            Children:
+                              - DBNavAnalytics:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Analytics"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="DataBarVertical"
+                                    OnSelect: =Navigate(Analytics, ScreenTransition.Fade)
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Analytics")
+                                    Tooltip: ="Analytics"
+                                    Width: =Parent.Width - 38
+                              - DBAnalyticsExpand:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Expand or collapse Analytics submenu"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =34
+                                    Icon: =If(Coalesce(varAnalyticsOpen, false), "ChevronDown", "ChevronRight")
+                                    IconRotation: =If(Coalesce(varAnalyticsOpen, false), 180, 0)
+                                    OnSelect: =Set(varAnalyticsOpen, !Coalesce(varAnalyticsOpen, false))
+                                    Text: =""
+                                    Tooltip: ="Toggle Analytics submenu"
+                                    Width: =34
+                        - DBAnalyticsSubmenu:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =48
+                              Visible: =!Coalesce(varSidebarCollapsed, false) && (Coalesce(varAnalyticsOpen, false) || false)
+                            Children:
+                              - DBNavAnalyticsOverview:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Overview"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="ViewDashboard"
+                                    OnSelect: =Navigate(AnalyticsOverview, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Overview")
+                                    Tooltip: ="Overview"
+                                    Width: =Parent.Width
+                              - DBNavAnalyticsReports:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Reports"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="DocumentBulletList"
+                                    OnSelect: =Navigate(AnalyticsReports, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Reports")
+                                    Tooltip: ="Reports"
+                                    Width: =Parent.Width
+                              - DBNavAnalyticsPerformance:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Performance"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="ChartMultiple"
+                                    OnSelect: =Navigate(AnalyticsPerformance, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Performance")
+                                    Tooltip: ="Performance"
+                                    Width: =Parent.Width
+                        - DBUsersNavRow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =36
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =2
+                              LayoutMinHeight: =36
+                              LayoutMinWidth: =48
+                            Children:
+                              - DBNavUsers:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Users"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="People"
+                                    OnSelect: =Navigate(Users, ScreenTransition.Fade)
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Users")
+                                    Tooltip: ="Users"
+                                    Width: =Parent.Width - 38
+                              - DBUsersExpand:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Expand or collapse Users submenu"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =34
+                                    Icon: =If(Coalesce(varUsersOpen, false), "ChevronDown", "ChevronRight")
+                                    IconRotation: =If(Coalesce(varUsersOpen, false), 180, 0)
+                                    OnSelect: =Set(varUsersOpen, !Coalesce(varUsersOpen, false))
+                                    Text: =""
+                                    Tooltip: ="Toggle Users submenu"
+                                    Width: =34
+                        - DBUsersSubmenu:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =48
+                              Visible: =!Coalesce(varSidebarCollapsed, false) && (Coalesce(varUsersOpen, false) || false)
+                            Children:
+                              - DBNavAllUsers:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="All Users"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="People"
+                                    OnSelect: =Navigate(AllUsers, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "All Users")
+                                    Tooltip: ="All Users"
+                                    Width: =Parent.Width
+                              - DBNavAddUser:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Add User"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="PersonAdd"
+                                    OnSelect: =Navigate(AddUser, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Add User")
+                                    Tooltip: ="Add User"
+                                    Width: =Parent.Width
+                              - DBNavUserRoles:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="User Roles"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Shield"
+                                    OnSelect: =Navigate(UserRoles, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "User Roles")
+                                    Tooltip: ="User Roles"
+                                    Width: =Parent.Width
+                        - DBProductsNavRow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =36
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =2
+                              LayoutMinHeight: =36
+                              LayoutMinWidth: =48
+                            Children:
+                              - DBNavProducts:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Products"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Box"
+                                    OnSelect: =Navigate(Products, ScreenTransition.Fade)
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Products")
+                                    Tooltip: ="Products"
+                                    Width: =Parent.Width - 38
+                              - DBProductsExpand:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Expand or collapse Products submenu"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =34
+                                    Icon: =If(Coalesce(varProductsOpen, false), "ChevronDown", "ChevronRight")
+                                    IconRotation: =If(Coalesce(varProductsOpen, false), 180, 0)
+                                    OnSelect: =Set(varProductsOpen, !Coalesce(varProductsOpen, false))
+                                    Text: =""
+                                    Tooltip: ="Toggle Products submenu"
+                                    Width: =34
+                        - DBProductsSubmenu:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =48
+                              Visible: =!Coalesce(varSidebarCollapsed, false) && (Coalesce(varProductsOpen, false) || false)
+                            Children:
+                              - DBNavAllProducts:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="All Products"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Box"
+                                    OnSelect: =Navigate(AllProducts, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "All Products")
+                                    Tooltip: ="All Products"
+                                    Width: =Parent.Width
+                              - DBNavAddProduct:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Add Product"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Add"
+                                    OnSelect: =Navigate(AddProduct, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Add Product")
+                                    Tooltip: ="Add Product"
+                                    Width: =Parent.Width
+                              - DBNavCategories:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Categories"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Tag"
+                                    OnSelect: =Navigate(Categories, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Categories")
+                                    Tooltip: ="Categories"
+                                    Width: =Parent.Width
+                        - DBOrdersNavRow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =36
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =2
+                              LayoutMinHeight: =36
+                              LayoutMinWidth: =48
+                            Children:
+                              - DBNavOrders:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Orders"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="ShoppingBag"
+                                    OnSelect: =Navigate(Orders, ScreenTransition.Fade)
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Orders")
+                                    Tooltip: ="Orders"
+                                    Width: =Parent.Width - 38
+                              - DBOrdersExpand:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Expand or collapse Orders submenu"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =34
+                                    Icon: =If(Coalesce(varOrdersOpen, false), "ChevronDown", "ChevronRight")
+                                    IconRotation: =If(Coalesce(varOrdersOpen, false), 180, 0)
+                                    OnSelect: =Set(varOrdersOpen, !Coalesce(varOrdersOpen, false))
+                                    Text: =""
+                                    Tooltip: ="Toggle Orders submenu"
+                                    Width: =34
+                        - DBOrdersSubmenu:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =48
+                              Visible: =!Coalesce(varSidebarCollapsed, false) && (Coalesce(varOrdersOpen, false) || false)
+                            Children:
+                              - DBNavAllOrders:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="All Orders"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="ClipboardList"
+                                    OnSelect: =Navigate(AllOrders, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "All Orders")
+                                    Tooltip: ="All Orders"
+                                    Width: =Parent.Width
+                              - DBNavPendingOrders:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Pending Orders"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Clock"
+                                    OnSelect: =Navigate(PendingOrders, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Pending Orders")
+                                    Tooltip: ="Pending Orders"
+                                    Width: =Parent.Width
+                              - DBNavCompletedOrders:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Completed Orders"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Checkmark"
+                                    OnSelect: =Navigate(CompletedOrders, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Completed Orders")
+                                    Tooltip: ="Completed Orders"
+                                    Width: =Parent.Width
+                        - DBSettingsNavRow:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =36
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =2
+                              LayoutMinHeight: =36
+                              LayoutMinWidth: =48
+                            Children:
+                              - DBNavSettings:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Settings"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Settings"
+                                    OnSelect: =Navigate(Settings, ScreenTransition.Fade)
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Settings")
+                                    Tooltip: ="Settings"
+                                    Width: =Parent.Width - 38
+                              - DBSettingsExpand:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Expand or collapse Settings submenu"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =34
+                                    Icon: =If(Coalesce(varSettingsOpen, false), "ChevronDown", "ChevronRight")
+                                    IconRotation: =If(Coalesce(varSettingsOpen, false), 180, 0)
+                                    OnSelect: =Set(varSettingsOpen, !Coalesce(varSettingsOpen, false))
+                                    Text: =""
+                                    Tooltip: ="Toggle Settings submenu"
+                                    Width: =34
+                        - DBSettingsSubmenu:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =2
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =48
+                              Visible: =!Coalesce(varSidebarCollapsed, false) && (Coalesce(varSettingsOpen, false) || false)
+                            Children:
+                              - DBNavProfile:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Profile"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Person"
+                                    OnSelect: =Navigate(Profile, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Profile")
+                                    Tooltip: ="Profile"
+                                    Width: =Parent.Width
+                              - DBNavSecurity:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Security"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="LockClosed"
+                                    OnSelect: =Navigate(Security, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Security")
+                                    Tooltip: ="Security"
+                                    Width: =Parent.Width
+                              - DBNavPreferences:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Preferences"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =36
+                                    Icon: ="Sliders"
+                                    OnSelect: =Navigate(Preferences, ScreenTransition.Fade)
+                                    PaddingLeft: =24
+                                    Text: =If(Coalesce(varSidebarCollapsed, false), "", "Preferences")
+                                    Tooltip: ="Preferences"
+                                    Width: =Parent.Width
+                        - DBNavMessages:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Messages"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              Icon: ="Chat"
+                              OnSelect: =Navigate(Messages, ScreenTransition.Fade)
+                              Text: =If(Coalesce(varSidebarCollapsed, false), "", "Messages")
+                              Tooltip: ="Messages"
+                              Width: =Parent.Width
+                        - DBNavNotifications:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Notifications"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              Icon: ="Alert"
+                              OnSelect: =Navigate(Notifications, ScreenTransition.Fade)
+                              Text: =If(Coalesce(varSidebarCollapsed, false), "", "Notifications")
+                              Tooltip: ="Notifications"
+                              Width: =Parent.Width
+                        - DBNavHelpSupport:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Help & Support"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              Icon: ="QuestionCircle"
+                              OnSelect: =Navigate(HelpSupport, ScreenTransition.Fade)
+                              Text: =If(Coalesce(varSidebarCollapsed, false), "", "Help & Support")
+                              Tooltip: ="Help & Support"
+                              Width: =Parent.Width
+            - DBContentPane:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(245, 247, 250, 1)
+                  FillPortions: =1
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutMinWidth: =260
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                Children:
+                  - DBMobileToolbar:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FillPortions: =0
+                        Height: =44
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutMinHeight: =44
+                        LayoutMinWidth: =200
+                        PaddingLeft: =8
+                        Visible: =App.Width < 720
+                      Children:
+                        - DBOpenSidebar:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open navigation drawer"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              Icon: ="Navigation"
+                              OnSelect: =Set(varMobileDrawerOpen, true)
+                              Text: ="Menu"
+                              Width: =92
+                  - AppLayout:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(245, 247, 250, 1)
+                        Height: =Parent.Height - If(App.Width < 720, 44, 0)
+                        Width: =Parent.Width
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =0
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                      Children:
+                        - Header:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =RGBA(21, 101, 192, 1)
+                              FillPortions: =0
+                              Height: =72
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =16
+                              LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                              LayoutMinHeight: =64
+                              LayoutMinWidth: =300
+                              PaddingBottom: =8
+                              PaddingLeft: =20
+                              PaddingRight: =20
+                              PaddingTop: =8
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - Brand:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =52
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Horizontal
+                                    LayoutGap: =10
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =185
+                                  Children:
+                                    - BrandLogo:
+                                        Control: Text
+                                        Properties:
+                                          Align: =Align.Center
+                                          Fill: =RGBA(255, 255, 255, 1)
+                                          FontColor: =RGBA(21, 101, 192, 1)
+                                          Height: =38
+                                          Size: =18
+                                          Text: ="B"
+                                          Weight: =FontWeight.Bold
+                                          Width: =38
+                                    - AppName:
+                                        Control: Text
+                                        Properties:
+                                          FontColor: =RGBA(255, 255, 255, 1)
+                                          Height: =36
+                                          Size: =16
+                                          Text: ="Business Dashboard"
+                                          Weight: =FontWeight.Semibold
+                                          Width: =175
+                              - PageHeading:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =1
+                                    Height: =52
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =180
+                                  Children:
+                                    - PageTitle:
+                                        Control: Text
+                                        Properties:
+                                          FontColor: =RGBA(255, 255, 255, 1)
+                                          Height: =28
+                                          Size: =18
+                                          Text: ="Dashboard Information"
+                                          Weight: =FontWeight.Semibold
+                                          Width: =Parent.Width
+                                    - Breadcrumb:
+                                        Control: Text
+                                        Properties:
+                                          FontColor: =RGBA(227, 242, 253, 1)
+                                          Height: =18
+                                          Size: =10
+                                          Text: ="Home / Dashboard"
+                                          Width: =Parent.Width
+                              - UserInfo:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =48
+                                    LayoutAlignItems: =LayoutAlignItems.End
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =150
+                                  Children:
+                                    - UserFullName:
+                                        Control: Text
+                                        Properties:
+                                          Align: =Align.Right
+                                          FontColor: =RGBA(255, 255, 255, 1)
+                                          Height: =24
+                                          Size: =13
+                                          Text: =User().FullName
+                                          Weight: =FontWeight.Semibold
+                                          Width: =Parent.Width
+                                    - UserEmail:
+                                        Control: Text
+                                        Properties:
+                                          Align: =Align.Right
+                                          FontColor: =RGBA(227, 242, 253, 1)
+                                          Height: =18
+                                          Size: =10
+                                          Text: =User().Email
+                                          Width: =Parent.Width
+                              - UserAvatar:
+                                  Control: ModernAvatar
+                                  Properties:
+                                    AccessibleLabel: ="Profile image for " & User().FullName
+                                    Appearance: =AvatarColor.Blue
+                                    Height: =42
+                                    Image: =User().Image
+                                    Name: =User().FullName
+                                    Width: =42
+                              - HeaderNotifications:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Notifications"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    Height: =38
+                                    Icon: ="Alert"
+                                    OnSelect: =Notify("You have no new notifications.", NotificationType.Information)
+                                    Text: =""
+                                    Tooltip: ="Notifications"
+                                    Width: =40
+                              - ProfileMenu:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Profile menu for " & User().FullName
+                                    Appearance: =ButtonAppearance.Secondary
+                                    Height: =38
+                                    OnSelect: =Notify("Signed in as " & User().Email, NotificationType.Information)
+                                    Text: ="Profile"
+                                    Tooltip: ="View signed-in account"
+                                    Width: =76
+                        - MainContent:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =RGBA(245, 247, 250, 1)
+                              FillPortions: =1
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =16
+                              LayoutMinHeight: =300
+                              LayoutMinWidth: =300
+                              LayoutOverflowY: =LayoutOverflow.Scroll
+                              PaddingBottom: =20
+                              PaddingLeft: =24
+                              PaddingRight: =24
+                              PaddingTop: =20
+                            Children:
+                              - FormCard:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    Fill: =RGBA(255, 255, 255, 1)
+                                    FillPortions: =1
+                                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =14
+                                    LayoutMinHeight: =360
+                                    LayoutMinWidth: =280
+                                    PaddingBottom: =24
+                                    PaddingLeft: =24
+                                    PaddingRight: =24
+                                    PaddingTop: =20
+                                    RadiusBottomLeft: =12
+                                    RadiusBottomRight: =12
+                                    RadiusTopLeft: =12
+                                    RadiusTopRight: =12
+                                    DropShadow: =DropShadow.Light
+                                  Children:
+                                    - FormHeading:
+                                        Control: GroupContainer
+                                        Variant: AutoLayout
+                                        Properties:
+                                          FillPortions: =0
+                                          Height: =48
+                                          LayoutAlignItems: =LayoutAlignItems.Start
+                                          LayoutDirection: =LayoutDirection.Vertical
+                                          LayoutGap: =2
+                                          LayoutMinHeight: =44
+                                          LayoutMinWidth: =240
+                                        Children:
+                                          - FormTitle:
+                                              Control: Text
+                                              Properties:
+                                                FontColor: =RGBA(31, 41, 55, 1)
+                                                Height: =26
+                                                Size: =18
+                                                Text: ="Dashboard Information"
+                                                Weight: =FontWeight.Semibold
+                                                Width: =Parent.Width
+                                          - FormSubtitle:
+                                              Control: Text
+                                              Properties:
+                                                FontColor: =RGBA(107, 114, 128, 1)
+                                                Height: =18
+                                                Size: =11
+                                                Text: ="Complete the required fields below."
+                                                Width: =Parent.Width
+                                    - FormFields:
+                                        Control: GroupContainer
+                                        Variant: AutoLayout
+                                        Properties:
+                                          FillPortions: =1
+                                          LayoutAlignItems: =LayoutAlignItems.Stretch
+                                          LayoutDirection: =LayoutDirection.Horizontal
+                                          LayoutGap: =20
+                                          LayoutMinHeight: =260
+                                          LayoutMinWidth: =260
+                                          LayoutWrap: =true
+                                        Children:
+                                          - UserField:
+                                              Control: GroupContainer
+                                              Variant: AutoLayout
+                                              Properties:
+                                                FillPortions: =1
+                                                LayoutMaxWidth: =If(Parent.Width >= 700, Parent.Width / 2, Parent.Width)
+                                                LayoutAlignItems: =LayoutAlignItems.Stretch
+                                                LayoutDirection: =LayoutDirection.Vertical
+                                                LayoutGap: =6
+                                                LayoutMinHeight: =82
+                                                LayoutMinWidth: =280
+                                              Children:
+                                                - UserLabel:
+                                                    Control: Text
+                                                    Properties:
+                                                      FontColor: =RGBA(31, 41, 55, 1)
+                                                      Height: =22
+                                                      Size: =12
+                                                      Text: ="User"
+                                                      Weight: =FontWeight.Semibold
+                                                      Width: =Parent.Width
+                                                - CurrentUserInput:
+                                                    Control: ModernTextInput
+                                                    Properties:
+                                                      AccessibleLabel: ="Current user"
+                                                      Default: =User().FullName
+                                                      DisplayMode: =DisplayMode.View
+                                                      Height: =38
+                                                      Width: =Parent.Width
+                                          - DepartmentField:
+                                              Control: GroupContainer
+                                              Variant: AutoLayout
+                                              Properties:
+                                                FillPortions: =1
+                                                LayoutMaxWidth: =If(Parent.Width >= 700, Parent.Width / 2, Parent.Width)
+                                                LayoutAlignItems: =LayoutAlignItems.Stretch
+                                                LayoutDirection: =LayoutDirection.Vertical
+                                                LayoutGap: =6
+                                                LayoutMinHeight: =82
+                                                LayoutMinWidth: =280
+                                              Children:
+                                                - DepartmentLabel:
+                                                    Control: Text
+                                                    Properties:
+                                                      FontColor: =RGBA(31, 41, 55, 1)
+                                                      Height: =22
+                                                      Size: =12
+                                                      Text: ="Department *"
+                                                      Weight: =FontWeight.Semibold
+                                                      Width: =Parent.Width
+                                                - DepartmentInput:
+                                                    Control: ModernTextInput
+                                                    Properties:
+                                                      AccessibleLabel: ="Department, required"
+                                                      Appearance: =Appearance.Outline
+                                                      Default: =""
+                                                      Height: =38
+                                                      Placeholder: ="Enter your department"
+                                                      Required: =true
+                                                      Width: =Parent.Width
+                                          - DateField:
+                                              Control: GroupContainer
+                                              Variant: AutoLayout
+                                              Properties:
+                                                FillPortions: =1
+                                                LayoutMaxWidth: =If(Parent.Width >= 700, Parent.Width / 2, Parent.Width)
+                                                LayoutAlignItems: =LayoutAlignItems.Stretch
+                                                LayoutDirection: =LayoutDirection.Vertical
+                                                LayoutGap: =6
+                                                LayoutMinHeight: =82
+                                                LayoutMinWidth: =280
+                                              Children:
+                                                - DateLabel:
+                                                    Control: Text
+                                                    Properties:
+                                                      FontColor: =RGBA(31, 41, 55, 1)
+                                                      Height: =22
+                                                      Size: =12
+                                                      Text: ="Date"
+                                                      Weight: =FontWeight.Semibold
+                                                      Width: =Parent.Width
+                                                - DateInput:
+                                                    Control: ModernDatePicker
+                                                    Properties:
+                                                      AccessibleLabel: ="Dashboard date"
+                                                      Appearance: =Appearance.Outline
+                                                      DefaultDate: =Today()
+                                                      Format: =DatePickerFormat.Short
+                                                      Height: =38
+                                                      Width: =Parent.Width
+                                          - StatusField:
+                                              Control: GroupContainer
+                                              Variant: AutoLayout
+                                              Properties:
+                                                FillPortions: =1
+                                                LayoutMaxWidth: =If(Parent.Width >= 700, Parent.Width / 2, Parent.Width)
+                                                LayoutAlignItems: =LayoutAlignItems.Stretch
+                                                LayoutDirection: =LayoutDirection.Vertical
+                                                LayoutGap: =6
+                                                LayoutMinHeight: =82
+                                                LayoutMinWidth: =280
+                                              Children:
+                                                - StatusLabel:
+                                                    Control: Text
+                                                    Properties:
+                                                      FontColor: =RGBA(31, 41, 55, 1)
+                                                      Height: =22
+                                                      Size: =12
+                                                      Text: ="Status *"
+                                                      Weight: =FontWeight.Semibold
+                                                      Width: =Parent.Width
+                                                - StatusInput:
+                                                    Control: ModernDropdown
+                                                    Properties:
+                                                      AccessibleLabel: ="Status, required"
+                                                      Appearance: =Appearance.Outline
+                                                      Default: '={Value: "New"}'
+                                                      Height: =38
+                                                      ItemDisplayText: =ThisItem.Value
+                                                      Items: '=Table({Value: "New"}, {Value: "In Progress"}, {Value: "Completed"}, {Value: "Cancelled"})'
+                                                      Required: =true
+                                                      Width: =Parent.Width
+                                          - DescriptionField:
+                                              Control: GroupContainer
+                                              Variant: AutoLayout
+                                              Properties:
+                                                FillPortions: =1
+                                                LayoutMaxWidth: =Parent.Width
+                                                LayoutAlignItems: =LayoutAlignItems.Stretch
+                                                LayoutDirection: =LayoutDirection.Vertical
+                                                LayoutGap: =6
+                                                LayoutMinHeight: =144
+                                                LayoutMinWidth: =280
+                                              Children:
+                                                - DescriptionLabel:
+                                                    Control: Text
+                                                    Properties:
+                                                      FontColor: =RGBA(31, 41, 55, 1)
+                                                      Height: =22
+                                                      Size: =12
+                                                      Text: ="Description *"
+                                                      Weight: =FontWeight.Semibold
+                                                      Width: =Parent.Width
+                                                - DescriptionInput:
+                                                    Control: ModernTextInput
+                                                    Properties:
+                                                      AccessibleLabel: ="Description, required"
+                                                      Appearance: =Appearance.Outline
+                                                      Default: =""
+                                                      Height: =104
+                                                      Placeholder: ="Enter a description"
+                                                      Required: =true
+                                                      Type: =TextInputType.Multiline
+                                                      Width: =Parent.Width
+                              - ActionButtons:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =48
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Horizontal
+                                    LayoutGap: =10
+                                    LayoutMinHeight: =48
+                                    LayoutMinWidth: =280
+                                    LayoutWrap: =true
+                                  Children:
+                                    - SubmitButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Validate and submit dashboard information"
+                                          Appearance: =ButtonAppearance.Primary
+                                          Height: =40
+                                          OnSelect: '=If(IsBlank(Trim(DepartmentInput.Text)) || IsBlank(Trim(DescriptionInput.Text)) || IsBlank(StatusInput.Selected.Value), Notify("Complete the required fields: Department, Status, and Description.", NotificationType.Error), Notify("Required fields are valid, but no data source is connected. Connect a data source to save this record.", NotificationType.Warning))'
+                                          Text: ="Submit"
+                                          Width: =112
+                                    - SaveDraftButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Save dashboard information as a draft"
+                                          Appearance: =ButtonAppearance.Secondary
+                                          Height: =40
+                                          OnSelect: =Notify("Drafts cannot be saved until a data source is connected.", NotificationType.Information)
+                                          Text: ="Save Draft"
+                                          Width: =116
+                                    - ClearButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Clear editable form fields"
+                                          Appearance: =ButtonAppearance.Secondary
+                                          Height: =40
+                                          OnSelect: =Reset(DepartmentInput); Reset(StatusInput); Reset(DateInput); Reset(DescriptionInput)
+                                          Text: ="Clear"
+                                          Width: =88
+                                    - RefreshButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Refresh dashboard data"
+                                          Appearance: =ButtonAppearance.Secondary
+                                          Height: =40
+                                          OnSelect: =Notify("No data sources are connected to refresh.", NotificationType.Information)
+                                          Text: ="Refresh"
+                                          Width: =100
+                        - Footer:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =RGBA(31, 41, 55, 1)
+                              FillPortions: =0
+                              Height: =48
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =12
+                              LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                              LayoutMinHeight: =44
+                              LayoutMinWidth: =280
+                              PaddingBottom: =8
+                              PaddingLeft: =20
+                              PaddingRight: =20
+                              PaddingTop: =8
+                            Children:
+                              - FooterAppName:
+                                  Control: Text
+                                  Properties:
+                                    FontColor: =RGBA(229, 231, 235, 1)
+                                    Height: =24
+                                    Size: =11
+                                    Text: ="Business Dashboard"
+                                    Width: =180
+                              - FooterCopyright:
+                                  Control: Text
+                                  Properties:
+                                    Align: =Align.Center
+                                    FontColor: =RGBA(209, 213, 219, 1)
+                                    Height: =24
+                                    Size: =11
+                                    Text: ="© 2026 Business Dashboard"
+                                    Width: =240
+                              - FooterVersion:
+                                  Control: Text
+                                  Properties:
+                                    Align: =Align.Right
+                                    FontColor: =RGBA(229, 231, 235, 1)
+                                    Height: =24
+                                    Size: =11
+                                    Text: ="Version 1.0"
+                                    Width: =100

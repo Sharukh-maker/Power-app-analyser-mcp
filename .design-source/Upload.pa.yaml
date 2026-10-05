@@ -1,0 +1,712 @@
+Screens:
+  Upload:
+    Properties:
+      Fill: =varCanvasFill
+      LoadingSpinnerColor: =varBrandBlue
+    Children:
+      - UploadShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =varCanvasFill
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Horizontal
+            Width: =Parent.Width
+          Children:
+            - UploadSidebar:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varSidebarFill
+                  FillPortions: =0
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =18
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 0, 232)
+                  PaddingBottom: =20
+                  PaddingLeft: =14
+                  PaddingRight: =14
+                  PaddingTop: =24
+                  Visible: =App.Width >= 720
+                  Width: =If(App.Width < 720, 0, 232)
+                Children:
+                  - UploadBrand:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =52
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =48
+                        LayoutMinWidth: =170
+                      Children:
+                        - UploadBrandBadge:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer logo"
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =varBrandBlue
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =36
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                              Size: =17
+                              Text: ="AI"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =36
+                        - UploadBrandText:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer application name"
+                              Color: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =42
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =13
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Top
+                  - UploadNavigation:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =180
+                        LayoutMinWidth: =170
+                      Children:
+                        - NavUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Upload requirements, current page"
+                              BasePaletteColor: =varBrandBlue
+                              Height: =40
+                              Icon: ="ArrowUpload"
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Upload requirements"
+                              Width: =Parent.Width
+                        - NavReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open review screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="CheckmarkCircle"
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Review artifacts"
+                              Width: =Parent.Width
+                        - NavJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Jira and sprint screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="Link"
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Jira & sprint"
+                              Width: =Parent.Width
+                        - NavDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open tracking dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="DataBarVertical"
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Dashboard"
+                              Width: =Parent.Width
+            - UploadMain:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varCanvasFill
+                  FillPortions: =1
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =12
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 280, 480)
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  PaddingBottom: =8
+                  PaddingLeft: =If(App.Width < 720, 0, 8)
+                  PaddingRight: =If(App.Width < 720, 0, 8)
+                  PaddingTop: =8
+                  Width: =Parent.Width
+                Children:
+                  - UploadHeader:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =varBorderColor
+                        BorderThickness: =1
+                        Fill: =varCardFill
+                        FillPortions: =0
+                        Height: =76
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =68
+                        LayoutMinWidth: =260
+                        PaddingBottom: =10
+                        PaddingLeft: =If(App.Width < 720, 16, 24)
+                        PaddingRight: =If(App.Width < 720, 16, 24)
+                        PaddingTop: =10
+                        Width: =Parent.Width
+                      Children:
+                        - UploadHeaderTitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer page heading"
+                              Color: =varTextPrimary
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =40
+                              LayoutMinWidth: =120
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =If(App.Width < 480, 15, 18)
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =If(App.Width < 520, Parent.Width - 70, Parent.Width - 320)
+                        - Identity:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =54
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =10
+                              LayoutMinHeight: =48
+                              LayoutMinWidth: =140
+                            Children:
+                              - UserText:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =48
+                                    LayoutAlignItems: =LayoutAlignItems.End
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =0
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =If(App.Width < 640, 0, 160)
+                                    Visible: =App.Width >= 640
+                                    Width: =If(App.Width < 640, 0, 250)
+                                  Children:
+                                    - UserName:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user name"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =24
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =User().FullName
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                                    - UserEmail:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user email"
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =20
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: =User().Email
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                              - UserAvatar:
+                                  Control: ModernAvatar
+                                  Properties:
+                                    AccessibleLabel: ="Current user profile image"
+                                    Appearance: =AvatarColor.Brand
+                                    Image: =User().Image
+                                    Name: =User().FullName
+                                    Height: =42
+                                    Shape: =AvatarShape.Circular
+                                    Tooltip: =User().FullName
+                                    Width: =42
+                  - UploadBody:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varCanvasFill
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =14
+                        LayoutMinHeight: =300
+                        LayoutMinWidth: =280
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                        PaddingBottom: =24
+                        PaddingLeft: =If(App.Width < 720, 16, 28)
+                        PaddingRight: =If(App.Width < 720, 16, 28)
+                        PaddingTop: =12
+                        FillPortions: =1
+                        Width: =Parent.Width
+                      Children:
+                        - UploadMobileNav:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =varSidebarFill
+                              FillPortions: =0
+                              Height: =If(App.Width < 340, 88, 44)
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =6
+                              LayoutMinHeight: =If(App.Width < 340, 88, 44)
+                              LayoutMinWidth: =Parent.Width
+                              LayoutWrap: =true
+                              Visible: =App.Width < 720
+                            Children:
+                              - MobileUpload:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Upload requirements, current page"
+                                    BasePaletteColor: =varBrandBlue
+                                    Height: =36
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Upload"
+                                    Width: =If(App.Width < 720, 74, 90)
+                              - MobileReview:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Open review screen"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    BasePaletteColor: =varBrandBlue
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Height: =36
+                                    OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Review"
+                                    Width: =If(App.Width < 720, 70, 82)
+                              - MobileJira:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Open Jira and sprint screen"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    BasePaletteColor: =varBrandBlue
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Height: =36
+                                    OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Jira"
+                                    Width: =If(App.Width < 720, 58, 70)
+                              - MobileDashboard:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Open tracking dashboard"
+                                    Appearance: =ButtonAppearance.Subtle
+                                    BasePaletteColor: =varBrandBlue
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Height: =36
+                                    OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Dashboard"
+                                    Width: =If(App.Width < 720, 86, 96)
+                        - UploadPageHeading:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =68
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =4
+                              LayoutMinHeight: =64
+                              LayoutMinWidth: =240
+                              Width: =Parent.Width
+                            Children:
+                              - UploadPageTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Add requirements page heading"
+                                    AutoHeight: =true
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =46
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =34
+                                    Text: ="Add requirements"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - UploadPageSubtitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Instructions for uploading requirement documents"
+                                    Color: =varTextSecondary
+                                    Font: =Font.'Segoe UI'
+                                    Height: =24
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Upload a BRD, FRD, or notes to prepare stories, acceptance criteria, tests, risks, and estimates."
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - UploadCard:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =varBorderColor
+                              BorderThickness: =1
+                              Fill: =varCardFill
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =14
+                              LayoutMinHeight: =460
+                              LayoutMinWidth: =260
+                              PaddingBottom: =20
+                              PaddingLeft: =20
+                              PaddingRight: =20
+                              PaddingTop: =20
+                              RadiusBottomLeft: =18
+                              RadiusBottomRight: =18
+                              RadiusTopLeft: =18
+                              RadiusTopRight: =18
+                              Width: =Parent.Width
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - SourceTypeLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Requirement source type field label"
+                                    AutoHeight: =true
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =24
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Source type"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - SourceType:
+                                  Control: ModernDropdown
+                                  Properties:
+                                    AccessibleLabel: ="Requirement source type"
+                                    Appearance: =Appearance.Outline
+                                    BasePaletteColor: =varBrandBlue
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Default: '={Value: "BRD"}'
+                                    Height: =40
+                                    ItemDisplayText: =ThisItem.Value
+                                    Items: '=Table({Value: "BRD"}, {Value: "FRD"}, {Value: "User requirements"}, {Value: "Email"}, {Value: "Meeting notes"})'
+                                    RadiusBottomLeft: =11
+                                    RadiusBottomRight: =11
+                                    RadiusTopLeft: =11
+                                    RadiusTopRight: =11
+                                    Width: =Parent.Width
+                              - UploadHint:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    Fill: =RGBA(250, 250, 252, 1)
+                                    FillPortions: =0
+                                    Height: =116
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =8
+                                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                                    LayoutMinHeight: =108
+                                    LayoutMinWidth: =240
+                                    PaddingBottom: =12
+                                    PaddingLeft: =14
+                                    PaddingRight: =14
+                                    PaddingTop: =12
+                                    RadiusBottomLeft: =8
+                                    RadiusBottomRight: =8
+                                    RadiusTopLeft: =8
+                                    RadiusTopRight: =8
+                                  Children:
+                                    - UploadHintTitle:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Requirement document selection prompt"
+                                          Align: =Align.Center
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =24
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =14
+                                          Text: ="Paste requirement content"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                                    - UploadHintDetails:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Supported file types and upload configuration details"
+                                          Align: =Align.Center
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =38
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =14
+                                          Text: ="Copy text from a BRD or FRD into the field below. Saved records stay in this device's Power Apps local cache."
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                                    - ChooseFileButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Learn how to add requirement text"
+                                          Appearance: =ButtonAppearance.Secondary
+                                          BasePaletteColor: =varBrandBlue
+                                          Height: =34
+                                          OnSelect: =Notify("This offline version accepts pasted text only. Native file upload needs a connected file source.", NotificationType.Information)
+                                          RadiusBottomLeft: =999
+                                          RadiusBottomRight: =999
+                                          RadiusTopLeft: =999
+                                          RadiusTopRight: =999
+                                          Text: ="Paste text below"
+                                          Tooltip: ="Paste the BRD or FRD text into the requirement field below"
+                                          Width: =152
+                              - ProjectLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Required project name field label"
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Project or document name *"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - ProjectInput:
+                                  Control: ModernTextInput
+                                  Properties:
+                                    AccessibleLabel: ="Project name, required"
+                                    Appearance: =Appearance.Outline
+                                    BasePaletteColor: =varBrandBlue
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Height: =40
+                                    Placeholder: ="Enter project or BRD/FRD name"
+                                    RadiusBottomLeft: =11
+                                    RadiusBottomRight: =11
+                                    RadiusTopLeft: =11
+                                    RadiusTopRight: =11
+                                    Required: =true
+                                    Width: =Parent.Width
+                              - RequirementTextLabel:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Requirement text field label"
+                                    Color: =varTextPrimary
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Requirement text *"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - RequirementText:
+                                  Control: ModernTextInput
+                                  Properties:
+                                    AccessibleLabel: ="Paste or enter requirement text"
+                                    Appearance: =Appearance.Outline
+                                    BasePaletteColor: =varBrandBlue
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Height: =156
+                                    Placeholder: ="Paste BRD/FRD excerpts or requirement notes here..."
+                                    RadiusBottomLeft: =11
+                                    RadiusBottomRight: =11
+                                    RadiusTopLeft: =11
+                                    RadiusTopRight: =11
+                                    Type: =TextInputType.Multiline
+                                    Width: =Parent.Width
+                              - UploadStatus:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="Requirement analysis integration status"
+                                    AutoHeight: =true
+                                    Color: =varTextSecondary
+                                    Font: =Font.'Segoe UI'
+                                    Height: =34
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Offline mode — each non-empty line becomes a reviewable story and test-case draft. This is a local template, not AI analysis. Device cache works in Power Apps Mobile/Windows, not a web browser. Records are not backed up or shared."
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - UploadActions:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    Height: =If(App.Width < 480, 96, 48)
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutDirection: =LayoutDirection.Horizontal
+                                    LayoutGap: =12
+                                    LayoutMinHeight: =If(App.Width < 480, 96, 48)
+                                    LayoutMinWidth: =240
+                                    LayoutWrap: =true
+                                  Children:
+                                    - AnalyzeButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Analyze requirement text"
+                                          BasePaletteColor: =varBrandBlue
+                                          Height: =40
+                                          OnSelect: "=If(\n  IsBlank(Trim(ProjectInput.Text)),\n  Notify(\"Enter a project or document name before continuing.\", NotificationType.Error),\n  If(\n    IsBlank(Trim(RequirementText.Text)),\n    Notify(\"Paste BRD or FRD requirement text before continuing.\", NotificationType.Error),\n    Set(varCurrentRequirementId, Text(GUID()));\n    With(\n      {\n        requirementLines: Filter(\n          Split(Substitute(Trim(RequirementText.Text), Char(13), \"\"), Char(10)),\n          !IsBlank(Trim(Value))\n        )\n      },\n      If(\n        CountRows(requirementLines) = 0,\n        Notify(\"Add at least one non-empty requirement line.\", NotificationType.Error),\n      Collect(\n        colRequirementDocuments,\n        {\n          RequirementId: varCurrentRequirementId,\n          ProjectName: Trim(ProjectInput.Text),\n          SourceType: SourceType.Selected.Value,\n          RequirementText: Trim(RequirementText.Text),\n          CreatedOn:\
+                                            \ Now(),\n          Status: \"Drafts generated locally\"\n        }\n      );\n      Collect(\n        colUserStories,\n        ForAll(\n          requirementLines,\n          {\n            StoryId: Text(GUID()),\n            RequirementId: varCurrentRequirementId,\n            ProjectName: Trim(ProjectInput.Text),\n            StoryText: \"As a user, I want \" & Trim(Value),\n            AcceptanceCriteria: \"Verify that the implemented system satisfies: \" & Trim(Value),\n            Estimate: \"Needs review\",\n            ApprovalStatus: \"Draft\",\n            SelectedForJira: false\n          }\n        )\n      );\n      Collect(\n        colTestCases,\n        ForAll(\n          requirementLines,\n          {\n            TestCaseId: Text(GUID()),\n            RequirementId: varCurrentRequirementId,\n            ProjectName: Trim(ProjectInput.Text),\n            Title: \"Verify: \" & Trim(Value),\n            Steps: \"Set up the relevant\
+                                            \ test data, perform the behavior described in the requirement, and observe the result.\",\n            ExpectedResult: Trim(Value),\n            Result: \"Not run\"\n          }\n        )\n      );\n      Collect(\n        colRiskNotes,\n        ForAll(\n          requirementLines,\n          {\n            RiskId: Text(GUID()),\n            RequirementId: varCurrentRequirementId,\n            ProjectName: Trim(ProjectInput.Text),\n            RequirementExcerpt: Trim(Value),\n            ReviewPrompt: \"Review dependencies, edge cases, permissions, and failure behavior for this requirement.\",\n            Status: \"Manual review required\"\n          }\n          )\n        )\n      );\n      IfError(\n        SaveData(colRequirementDocuments, \"AIRequirementAnalyzerDocuments\");\n        SaveData(colUserStories, \"AIRequirementAnalyzerStories\");\n        SaveData(colTestCases, \"AIRequirementAnalyzerTests\");\n        SaveData(colRiskNotes,\
+                                            \ \"AIRequirementAnalyzerRisks\");\n        Notify(\"Saved the BRD/FRD text and local story/test drafts on this device. Review the drafts before use.\", NotificationType.Success);\n        Navigate(Review, ScreenTransition.Fade),\n        Notify(\"Device persistence is unavailable in this player. Drafts are available only for this session; use Power Apps Mobile or Windows to keep them on-device.\", NotificationType.Warning);\n        Navigate(Review, ScreenTransition.Fade)\n      )\n    )\n  )\n)"
+                                          RadiusBottomLeft: =999
+                                          RadiusBottomRight: =999
+                                          RadiusTopLeft: =999
+                                          RadiusTopRight: =999
+                                          Text: ="Analyze requirements"
+                                          Width: =188
+                                    - ClearUploadButton:
+                                        Control: ModernButton
+                                        Properties:
+                                          AccessibleLabel: ="Clear project and requirement text"
+                                          Appearance: =ButtonAppearance.Secondary
+                                          BasePaletteColor: =varBrandBlue
+                                          Height: =40
+                                          OnSelect: =Reset(ProjectInput); Reset(RequirementText); Reset(SourceType)
+                                          RadiusBottomLeft: =999
+                                          RadiusBottomRight: =999
+                                          RadiusTopLeft: =999
+                                          RadiusTopRight: =999
+                                          Text: ="Clear"
+                                          Width: =90

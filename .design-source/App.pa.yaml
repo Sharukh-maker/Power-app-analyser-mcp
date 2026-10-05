@@ -1,0 +1,4 @@
+App:
+  Properties:
+    OnStart: "=Set(varBrandBlue, ColorValue(\"#0066CC\"));\nSet(varSidebarFill, ColorValue(\"#111827\"));\nSet(varCanvasFill, ColorValue(\"#F5F5F7\"));\nSet(varCardFill, ColorValue(\"#FFFFFF\"));\nSet(varTextPrimary, ColorValue(\"#1D1D1F\"));\nSet(varTextSecondary, ColorValue(\"#7A7A7A\"));\nSet(varBorderColor, ColorValue(\"#E0E0E0\"));\nIfError(\n  LoadData(colRequirementDocuments, \"AIRequirementAnalyzerDocuments\", true);\n  LoadData(colUserStories, \"AIRequirementAnalyzerStories\", true);\n  LoadData(colTestCases, \"AIRequirementAnalyzerTests\", true);\n  LoadData(colRiskNotes, \"AIRequirementAnalyzerRisks\", true);\n  LoadData(colJiraDrafts, \"AIRequirementAnalyzerJiraDrafts\", true);\n  true,\n  Notify(\"Device-local restore is not supported in this player. Use Power Apps Mobile or Windows to keep data between sessions.\", NotificationType.Warning)\n)"
+    Theme: =PowerAppsTheme

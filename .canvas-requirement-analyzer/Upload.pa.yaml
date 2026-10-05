@@ -1,0 +1,384 @@
+Screens:
+  Upload:
+    Properties:
+      Fill: =RGBA(245, 246, 248, 1)
+      LoadingSpinnerColor: =RGBA(14, 122, 107, 1)
+    Children:
+      - UploadShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =RGBA(245, 246, 248, 1)
+            Height: =Parent.Height
+            Width: =Parent.Width
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutGap: =0
+            LayoutMinWidth: =300
+          Children:
+            - UploadSidebar:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(255, 255, 255, 1)
+                  FillPortions: =0
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =18
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =190
+                  PaddingBottom: =20
+                  PaddingLeft: =14
+                  PaddingRight: =14
+                  PaddingTop: =24
+                  Width: =If(App.Width < 720, 0, 220)
+                  Visible: =App.Width >= 720
+                Children:
+                  - UploadBrand:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =52
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =48
+                        LayoutMinWidth: =170
+                      Children:
+                        - UploadBrandBadge:
+                            Control: Text
+                            Properties:
+                              Align: =Align.Center
+                              Fill: =RGBA(14, 122, 107, 1)
+                              FontColor: =RGBA(255, 255, 255, 1)
+                              Height: =36
+                              Size: =16
+                              Text: ="R"
+                              Weight: =FontWeight.Bold
+                              Width: =36
+                        - UploadBrandText:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(23, 35, 58, 1)
+                              Height: =42
+                              Size: =14
+                              Text: ="Requirement Analyzer"
+                              Weight: =FontWeight.Semibold
+                              Width: =150
+                  - UploadNavigation:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =1
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =6
+                        LayoutMinHeight: =180
+                        LayoutMinWidth: =170
+                      Children:
+                        - NavUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Upload requirements, current page"
+                              Appearance: =ButtonAppearance.Primary
+                              Height: =40
+                              Icon: ="ArrowUpload"
+                              Text: ="Upload requirements"
+                              Width: =Parent.Width
+                        - NavReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open review screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =40
+                              Icon: ="CheckmarkCircle"
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                              Text: ="Review artifacts"
+                              Width: =Parent.Width
+                        - NavJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Jira and sprint screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =40
+                              Icon: ="Link"
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                              Text: ="Jira & sprint"
+                              Width: =Parent.Width
+                        - NavDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open tracking dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =40
+                              Icon: ="DataBarVertical"
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              Text: ="Dashboard"
+                              Width: =Parent.Width
+            - UploadContent:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =RGBA(245, 246, 248, 1)
+                  FillPortions: =1
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =16
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =280
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  PaddingBottom: =24
+                  PaddingLeft: =If(App.Width < 720, 16, 28)
+                  PaddingRight: =If(App.Width < 720, 16, 28)
+                  PaddingTop: =20
+                Children:
+                  - UploadMobileNav:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =44
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =4
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =260
+                        LayoutWrap: =true
+                        Visible: =App.Width < 720
+                      Children:
+                        - MobileUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Upload requirements, current page"
+                              Appearance: =ButtonAppearance.Primary
+                              Height: =36
+                              Text: ="Upload"
+                              Width: =90
+                        - MobileReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open review screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                              Text: ="Review"
+                              Width: =82
+                        - MobileJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Jira and sprint screen"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                              Text: ="Jira"
+                              Width: =70
+                        - MobileDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open tracking dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              Height: =36
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              Text: ="Dashboard"
+                              Width: =96
+                  - UploadPageHeading:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        FillPortions: =0
+                        Height: =68
+                        LayoutAlignItems: =LayoutAlignItems.Start
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =4
+                        LayoutMinHeight: =64
+                        LayoutMinWidth: =240
+                      Children:
+                        - UploadPageTitle:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(23, 35, 58, 1)
+                              Height: =34
+                              Size: =24
+                              Text: ="Add requirements"
+                              Weight: =FontWeight.Semibold
+                              Width: =Parent.Width
+                        - UploadPageSubtitle:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(91, 102, 122, 1)
+                              Height: =24
+                              Size: =12
+                              Text: ="Upload a BRD, FRD, or notes to prepare stories, acceptance criteria, tests, risks, and estimates."
+                              Width: =Parent.Width
+                  - UploadCard:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FillPortions: =1
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =14
+                        LayoutMinHeight: =460
+                        LayoutMinWidth: =260
+                        PaddingBottom: =20
+                        PaddingLeft: =20
+                        PaddingRight: =20
+                        PaddingTop: =20
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        DropShadow: =DropShadow.Light
+                      Children:
+                        - SourceTypeLabel:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(23, 35, 58, 1)
+                              Height: =24
+                              Size: =13
+                              Text: ="Source type"
+                              Weight: =FontWeight.Semibold
+                              Width: =Parent.Width
+                        - SourceType:
+                            Control: ModernDropdown
+                            Properties:
+                              AccessibleLabel: ="Requirement source type"
+                              Appearance: =Appearance.Outline
+                              Default: '={Value: "BRD"}'
+                              Height: =40
+                              ItemDisplayText: =ThisItem.Value
+                              Items: '=Table({Value: "BRD"}, {Value: "FRD"}, {Value: "User requirements"}, {Value: "Email"}, {Value: "Meeting notes"})'
+                              Width: =Parent.Width
+                        - UploadHint:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              Fill: =RGBA(242, 248, 247, 1)
+                              FillPortions: =0
+                              Height: =116
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =8
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =108
+                              LayoutMinWidth: =240
+                              PaddingBottom: =12
+                              PaddingLeft: =14
+                              PaddingRight: =14
+                              PaddingTop: =12
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                            Children:
+                              - UploadHintTitle:
+                                  Control: Text
+                                  Properties:
+                                    Align: =Align.Center
+                                    FontColor: =RGBA(23, 35, 58, 1)
+                                    Height: =24
+                                    Size: =14
+                                    Text: ="Choose a requirement document"
+                                    Weight: =FontWeight.Semibold
+                                    Width: =Parent.Width
+                              - UploadHintDetails:
+                                  Control: Text
+                                  Properties:
+                                    Align: =Align.Center
+                                    FontColor: =RGBA(91, 102, 122, 1)
+                                    Height: =38
+                                    Size: =11
+                                    Text: ="PDF, Word, and text files. Connect a SharePoint library and upload flow to enable file upload."
+                                    Width: =Parent.Width
+                              - ChooseFileButton:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Choose a requirement file; file storage is not configured"
+                                    Appearance: =ButtonAppearance.Secondary
+                                    Height: =34
+                                    OnSelect: =Notify("File upload requires a connected SharePoint document library and upload flow.", NotificationType.Information)
+                                    Text: ="Choose file"
+                                    Tooltip: ="Connect SharePoint and Power Automate to enable upload"
+                                    Width: =132
+                        - ProjectLabel:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(23, 35, 58, 1)
+                              Height: =22
+                              Size: =13
+                              Text: ="Project *"
+                              Weight: =FontWeight.Semibold
+                              Width: =Parent.Width
+                        - ProjectInput:
+                            Control: ModernTextInput
+                            Properties:
+                              AccessibleLabel: ="Project name, required"
+                              Appearance: =Appearance.Outline
+                              Default: =""
+                              Height: =40
+                              Placeholder: ="Enter project name"
+                              Required: =true
+                              Width: =Parent.Width
+                        - RequirementTextLabel:
+                            Control: Text
+                            Properties:
+                              FontColor: =RGBA(23, 35, 58, 1)
+                              Height: =22
+                              Size: =13
+                              Text: ="Requirement text (optional when document upload is configured)"
+                              Weight: =FontWeight.Semibold
+                              Width: =Parent.Width
+                        - RequirementText:
+                            Control: ModernTextInput
+                            Properties:
+                              AccessibleLabel: ="Paste or enter requirement text"
+                              Appearance: =Appearance.Outline
+                              Default: =""
+                              Height: =156
+                              Placeholder: ="Paste BRD/FRD excerpts or requirement notes here..."
+                              Type: =TextInputType.Multiline
+                              Width: =Parent.Width
+                        - UploadStatus:
+                            Control: Text
+                            Properties:
+                              AutoHeight: =true
+                              FontColor: =RGBA(91, 102, 122, 1)
+                              Height: =34
+                              Size: =11
+                              Text: ="Analysis is not connected yet. Add the Analyze Document Power Automate flow and an approved Azure OpenAI deployment."
+                              Width: =Parent.Width
+                        - UploadActions:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =44
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =10
+                              LayoutMinHeight: =44
+                              LayoutMinWidth: =240
+                              LayoutWrap: =true
+                            Children:
+                              - AnalyzeButton:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Analyze requirement text"
+                                    Appearance: =ButtonAppearance.Primary
+                                    Height: =40
+                                    OnSelect: '=If(IsBlank(Trim(ProjectInput.Text)), Notify("Enter a project name before continuing.", NotificationType.Error), If(IsBlank(Trim(RequirementText.Text)), Notify("Paste requirement text. Document upload is not configured yet.", NotificationType.Error), Notify("Connect the Analyze Document flow, Dataverse or SharePoint storage, and Azure OpenAI before analysis can run.", NotificationType.Warning)))'
+                                    Text: ="Analyze requirements"
+                                    Width: =188
+                              - ClearUploadButton:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Clear project and requirement text"
+                                    Appearance: =ButtonAppearance.Secondary
+                                    Height: =40
+                                    OnSelect: =Reset(ProjectInput); Reset(RequirementText); Reset(SourceType)
+                                    Text: ="Clear"
+                                    Width: =90

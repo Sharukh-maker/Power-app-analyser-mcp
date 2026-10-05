@@ -1,0 +1,830 @@
+Screens:
+  Review:
+    Properties:
+      Fill: =varCanvasFill
+      LoadingSpinnerColor: =varBrandBlue
+    Children:
+      - ReviewShell:
+          Control: GroupContainer
+          Variant: AutoLayout
+          Properties:
+            Fill: =varCanvasFill
+            Height: =Parent.Height
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            Width: =Parent.Width
+            LayoutGap: =0
+            LayoutOverflowX: =LayoutOverflow.Hide
+          Children:
+            - ReviewSidebar:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varSidebarFill
+                  FillPortions: =0
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =16
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 0, 232)
+                  PaddingBottom: =20
+                  PaddingLeft: =16
+                  PaddingRight: =16
+                  PaddingTop: =18
+                  Visible: =App.Width >= 720
+                  Width: =If(App.Width < 720, 0, 232)
+                Children:
+                  - ReviewSidebarBrand:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        FillPortions: =0
+                        Height: =60
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =10
+                        LayoutMinHeight: =56
+                        LayoutMinWidth: =200
+                      Children:
+                        - ReviewSidebarBrandBadge:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer logo"
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =varBrandBlue
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Bold
+                              Height: =36
+                              LayoutMinWidth: =36
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =8
+                              RadiusBottomRight: =8
+                              RadiusTopLeft: =8
+                              RadiusTopRight: =8
+                              Size: =15
+                              Text: ="AI"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =36
+                        - ReviewSidebarBrandName:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="AI Requirement Analyzer"
+                              Color: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =42
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =14
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =Parent.Width - 52
+                  - ReviewSidebarNavigation:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =8
+                        LayoutMinHeight: =240
+                        LayoutMinWidth: =196
+                      Children:
+                        - ReviewSidebarUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Upload requirements"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="ArrowUpload"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Upload requirements"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                        - ReviewSidebarReview:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Review stories"
+                              Appearance: =ButtonAppearance.Primary
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="CheckmarkCircle"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Review stories"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Review, ScreenTransition.Fade)
+                        - ReviewSidebarJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Jira & sprint"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="Link"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Jira & sprint"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                        - ReviewSidebarDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =44
+                              Icon: ="DataBarVertical"
+                              RadiusBottomLeft: =12
+                              RadiusBottomRight: =12
+                              RadiusTopLeft: =12
+                              RadiusTopRight: =12
+                              Text: ="Dashboard"
+                              Width: =Parent.Width
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+            - ReviewMain:
+                Control: GroupContainer
+                Variant: AutoLayout
+                Properties:
+                  Fill: =varCanvasFill
+                  FillPortions: =1
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Stretch
+                  LayoutDirection: =LayoutDirection.Vertical
+                  LayoutGap: =0
+                  LayoutMinHeight: =300
+                  LayoutMinWidth: =If(App.Width < 720, 280, 480)
+                  LayoutOverflowY: =LayoutOverflow.Scroll
+                  Width: =Parent.Width
+                Children:
+                  - ReviewHeader:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        BorderColor: =varBorderColor
+                        BorderThickness: =1
+                        Fill: =varCardFill
+                        FillPortions: =0
+                        Height: =76
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =12
+                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                        LayoutMinHeight: =68
+                        LayoutMinWidth: =260
+                        PaddingBottom: =10
+                        PaddingLeft: =If(App.Width < 720, 16, 24)
+                        PaddingRight: =If(App.Width < 720, 16, 24)
+                        PaddingTop: =10
+                        Width: =Parent.Width
+                      Children:
+                        - ReviewHeaderTitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="Review artifacts page heading"
+                              Color: =varTextPrimary
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =40
+                              LayoutMinWidth: =120
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Size: =If(App.Width < 480, 15, 18)
+                              Text: ="Review artifacts"
+                              VerticalAlign: =VerticalAlign.Middle
+                              Width: =If(App.Width < 520, Parent.Width - 70, Parent.Width - 320)
+                        - ReviewHeaderUserIdentity:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =54
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =10
+                              LayoutMinHeight: =48
+                              LayoutMinWidth: =140
+                            Children:
+                              - ReviewHeaderUserText:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    FillPortions: =0
+                                    Height: =48
+                                    LayoutAlignItems: =LayoutAlignItems.End
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =0
+                                    LayoutMinHeight: =44
+                                    LayoutMinWidth: =If(App.Width < 640, 0, 160)
+                                    Visible: =App.Width >= 640
+                                    Width: =If(App.Width < 640, 0, 250)
+                                  Children:
+                                    - ReviewHeaderUserName:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user name"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =24
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =14
+                                          Text: =User().FullName
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                                    - ReviewHeaderUserEmail:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="Current user email"
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =20
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Size: =11
+                                          Text: =User().Email
+                                          VerticalAlign: =VerticalAlign.Middle
+                                          Width: =Parent.Width
+                              - ReviewHeaderUserAvatar:
+                                  Control: ModernAvatar
+                                  Properties:
+                                    AccessibleLabel: ="Current user profile image"
+                                    Appearance: =AvatarColor.Brand
+                                    Image: =User().Image
+                                    Name: =User().FullName
+                                    Height: =42
+                                    Shape: =AvatarShape.Circular
+                                    Tooltip: =User().FullName
+                                    Width: =42
+                  - ReviewNav:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        Fill: =varSidebarFill
+                        FillPortions: =0
+                        Height: =If(App.Width < 440, 104, 64)
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =8
+                        LayoutMinHeight: =If(App.Width < 440, 104, 64)
+                        LayoutMinWidth: =280
+                        LayoutWrap: =true
+                        PaddingLeft: =16
+                        PaddingRight: =16
+                        Visible: =App.Width < 720
+                      Children:
+                        - ReviewBrandBadge:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="review brand badge"
+                              Align: =Align.Center
+                              Color: =RGBA(255, 255, 255, 1)
+                              Fill: =varBrandBlue
+                              FontWeight: =FontWeight.Bold
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =13
+                              Text: ="AI"
+                              VerticalAlign: =VerticalAlign.Top
+                              Visible: =App.Width >= 900
+                              Width: =32
+                        - ReviewBrand:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="review brand"
+                              Color: =RGBA(255, 255, 255, 1)
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =36
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =17
+                              Text: ="AI Requirement Analyzer"
+                              VerticalAlign: =VerticalAlign.Top
+                              Visible: =App.Width >= 900
+                              Width: =210
+                        - ReviewNavUpload:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open upload requirements"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="ArrowUpload"
+                              OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Upload"
+                              Width: =If(App.Width < 720, 88, 100)
+                        - ReviewNavCurrent:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Review artifacts, current page"
+                              BasePaletteColor: =varBrandBlue
+                              Height: =40
+                              Icon: ="CheckmarkCircle"
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Review"
+                              Width: =If(App.Width < 720, 84, 100)
+                        - ReviewNavJira:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open Jira and sprint"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="Link"
+                              OnSelect: =Navigate(JiraSprint, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Jira & sprint"
+                              Width: =If(App.Width < 720, 112, 124)
+                        - ReviewNavDashboard:
+                            Control: ModernButton
+                            Properties:
+                              AccessibleLabel: ="Open dashboard"
+                              Appearance: =ButtonAppearance.Subtle
+                              BasePaletteColor: =varBrandBlue
+                              Color: =RGBA(255, 255, 255, 1)
+                              Height: =40
+                              Icon: ="DataBarVertical"
+                              OnSelect: =Navigate(Dashboard, ScreenTransition.Fade)
+                              RadiusBottomLeft: =999
+                              RadiusBottomRight: =999
+                              RadiusTopLeft: =999
+                              RadiusTopRight: =999
+                              Text: ="Dashboard"
+                              Width: =If(App.Width < 720, 96, 116)
+                  - ReviewContent:
+                      Control: GroupContainer
+                      Variant: AutoLayout
+                      Properties:
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =14
+                        LayoutMinHeight: =300
+                        LayoutMinWidth: =280
+                        LayoutOverflowY: =LayoutOverflow.Scroll
+                        PaddingBottom: =24
+                        PaddingLeft: =If(App.Width < 720, 16, 28)
+                        PaddingRight: =If(App.Width < 720, 16, 28)
+                        PaddingTop: =22
+                        FillPortions: =1
+                        Width: =Parent.Width
+                      Children:
+                        - ReviewTitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="review title"
+                              AutoHeight: =true
+                              Color: =varTextPrimary
+                              Font: =Font.'Segoe UI'
+                              FontWeight: =FontWeight.Semibold
+                              Height: =46
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =34
+                              Text: ="Review generated artifacts"
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - ReviewSubtitle:
+                            Control: ModernText
+                            Properties:
+                              AccessibleLabel: ="review subtitle"
+                              Color: =varTextSecondary
+                              Font: =Font.'Segoe UI'
+                              Height: =26
+                              LayoutMinWidth: =96
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Size: =14
+                              Text: ="Review and approve stories, acceptance criteria, test cases, risks, and estimates before Jira."
+                              VerticalAlign: =VerticalAlign.Top
+                              Width: =Parent.Width
+                        - ReviewNotice:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              BorderColor: =varBrandBlue
+                              BorderThickness: =1
+                              Fill: =varCardFill
+                              FillPortions: =0
+                              Height: =86
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =6
+                              LayoutMinHeight: =80
+                              LayoutMinWidth: =260
+                              PaddingBottom: =14
+                              PaddingLeft: =16
+                              PaddingRight: =16
+                              PaddingTop: =14
+                              RadiusBottomLeft: =16
+                              RadiusBottomRight: =16
+                              RadiusTopLeft: =16
+                              RadiusTopRight: =16
+                              DropShadow: =DropShadow.Light
+                            Children:
+                              - ReviewNoticeTitle:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="review notice title"
+                                    Color: =RGBA(51, 51, 51, 1)
+                                    Font: =Font.'Segoe UI'
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =22
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Select stories to approve for Jira"
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                              - ReviewNoticeText:
+                                  Control: ModernText
+                                  Properties:
+                                    AccessibleLabel: ="review notice text"
+                                    AutoHeight: =true
+                                    Color: =RGBA(51, 51, 51, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =34
+                                    LayoutMinWidth: =96
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =14
+                                    Text: ="Select story rows below, then approve only those items. Drafts are generated locally from pasted requirement lines—not by AI. Verify every story and test; review risks and estimates manually."
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =Parent.Width
+                        - ReviewSections:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              LayoutAlignItems: =LayoutAlignItems.Stretch
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutGap: =16
+                              LayoutMinHeight: =600
+                              LayoutMinWidth: =260
+                              LayoutOverflowY: =LayoutOverflow.Scroll
+                              LayoutWrap: =true
+                            Children:
+                              - StoriesCard:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Fill: =varCardFill
+                                    FillPortions: =0
+                                    Height: =If(App.Width < 720, 440, 390)
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =8
+                                    LayoutMinHeight: =390
+                                    PaddingBottom: =16
+                                    PaddingLeft: =16
+                                    PaddingRight: =16
+                                    PaddingTop: =16
+                                    RadiusBottomLeft: =18
+                                    RadiusBottomRight: =18
+                                    RadiusTopLeft: =18
+                                    RadiusTopRight: =18
+                                    DropShadow: =DropShadow.Light
+                                  Children:
+                                    - StoriesTitle:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="stories title"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =26
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =21
+                                          Text: ="User stories & acceptance criteria"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                                    - StoriesTable:
+                                        Control: Gallery
+                                        Variant: VariableHeight
+                                        Properties:
+                                          AccessibleLabel: ="Select user story rows for approval to Jira"
+                                          BorderColor: =varBorderColor
+                                          BorderThickness: =1
+                                          DisplayMode: =If(CountRows(colUserStories) = 0, DisplayMode.View, DisplayMode.Edit)
+                                          Fill: =varCardFill
+                                          Height: =If(App.Width < 720, 340, 290)
+                                          Items: =colUserStories
+                                          LoadingSpinnerColor: =varBrandBlue
+                                          Selectable: =false
+                                          TemplatePadding: =6
+                                          TemplateSize: =152
+                                          Width: =Parent.Width
+                                        Children:
+                                          - StorySelection:
+                                              Control: ModernCheckbox
+                                              Properties:
+                                                AccessibleLabel: ="Select this story for Jira approval"
+                                                BasePaletteColor: =varBrandBlue
+                                                Default: =Coalesce(ThisItem.SelectedForJira, false)
+                                                Label: ="Select for Jira"
+                                                OnCheck: '=UpdateIf(colUserStories, StoryId = ThisItem.StoryId, {SelectedForJira: true});
+
+                                                  IfError(SaveData(colUserStories, "AIRequirementAnalyzerStories"), Notify("Selection is not persistent in this player.", NotificationType.Warning))'
+                                                OnUncheck: '=UpdateIf(colUserStories, StoryId = ThisItem.StoryId, {SelectedForJira: false});
+
+                                                  IfError(SaveData(colUserStories, "AIRequirementAnalyzerStories"), Notify("Selection is not persistent in this player.", NotificationType.Warning))'
+                                                Width: =180
+                                                X: =10
+                                                Y: =4
+                                          - StoryRowText:
+                                              Control: ModernText
+                                              Properties:
+                                                AccessibleLabel: ="User story text"
+                                                AutoHeight: =true
+                                                Color: =varTextPrimary
+                                                Font: =Font.'Segoe UI'
+                                                FontWeight: =FontWeight.Semibold
+                                                Height: =40
+                                                Size: =14
+                                                Text: =ThisItem.StoryText
+                                                Width: =Parent.TemplateWidth - 28
+                                                X: =14
+                                                Y: =38
+                                          - StoryAcceptanceText:
+                                              Control: ModernText
+                                              Properties:
+                                                AccessibleLabel: ="Acceptance criteria for this user story"
+                                                AutoHeight: =true
+                                                Color: =RGBA(90, 90, 90, 1)
+                                                Font: =Font.'Segoe UI'
+                                                Height: =42
+                                                Size: =12
+                                                Text: ="Acceptance — " & ThisItem.AcceptanceCriteria
+                                                Width: =Parent.TemplateWidth - 28
+                                                X: =14
+                                                Y: =76
+                                          - StoryEstimateStatus:
+                                              Control: ModernText
+                                              Properties:
+                                                AccessibleLabel: ="Story estimate and approval status"
+                                                Color: =varTextSecondary
+                                                Font: =Font.'Segoe UI'
+                                                Height: =22
+                                                Size: =11
+                                                Text: ="Estimate — " & ThisItem.Estimate & " / " & ThisItem.ApprovalStatus
+                                                Width: =Parent.TemplateWidth - 28
+                                                X: =14
+                                                Y: =122
+                              - TestsCard:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Fill: =varCardFill
+                                    FillPortions: =0
+                                    Height: =If(App.Width < 720, 300, 250)
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =8
+                                    LayoutMinHeight: =220
+                                    PaddingBottom: =16
+                                    PaddingLeft: =16
+                                    PaddingRight: =16
+                                    PaddingTop: =16
+                                    RadiusBottomLeft: =18
+                                    RadiusBottomRight: =18
+                                    RadiusTopLeft: =18
+                                    RadiusTopRight: =18
+                                    DropShadow: =DropShadow.Light
+                                  Children:
+                                    - TestsTitle:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="tests title"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =26
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =21
+                                          Text: ="UAT test cases"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                                    - TestsEmpty:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="tests empty"
+                                          AutoHeight: =true
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =If(App.Width < 480, 104, 48)
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =14
+                                          Text: "=If(\n  CountRows(colTestCases) = 0,\n  \"No local test-case drafts yet. Add requirement text on Upload.\",\n  \"LOCAL TEST CASES (\" & CountRows(colTestCases) & \")\" & Char(10) &\n  Concat(\n    FirstN(colTestCases, 3),\n    Title & Char(10) & \"Steps: \" & Steps & Char(10) & \"Expected: \" & ExpectedResult & Char(10)\n  )\n)"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                              - RisksCard:
+                                  Control: GroupContainer
+                                  Variant: AutoLayout
+                                  Properties:
+                                    BorderColor: =varBorderColor
+                                    BorderThickness: =1
+                                    Fill: =varCardFill
+                                    FillPortions: =0
+                                    Height: =If(App.Width < 720, 300, 250)
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutGap: =8
+                                    LayoutMinHeight: =220
+                                    PaddingBottom: =16
+                                    PaddingLeft: =16
+                                    PaddingRight: =16
+                                    PaddingTop: =16
+                                    RadiusBottomLeft: =18
+                                    RadiusBottomRight: =18
+                                    RadiusTopLeft: =18
+                                    RadiusTopRight: =18
+                                    DropShadow: =DropShadow.Light
+                                  Children:
+                                    - RisksTitle:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="risks title"
+                                          Color: =varTextPrimary
+                                          Font: =Font.'Segoe UI'
+                                          FontWeight: =FontWeight.Semibold
+                                          Height: =26
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =21
+                                          Text: ="Risks & estimates"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                                    - RisksEmpty:
+                                        Control: ModernText
+                                        Properties:
+                                          AccessibleLabel: ="risks empty"
+                                          AutoHeight: =true
+                                          Color: =varTextSecondary
+                                          Font: =Font.'Segoe UI'
+                                          Height: =If(App.Width < 480, 104, 48)
+                                          LayoutMinWidth: =96
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          RadiusBottomLeft: =0
+                                          RadiusBottomRight: =0
+                                          RadiusTopLeft: =0
+                                          RadiusTopRight: =0
+                                          Size: =14
+                                          Text: "=If(\n  CountRows(colRiskNotes) = 0,\n  \"No risk prompts yet. Risks require human assessment; estimate points are left unassigned.\",\n  \"MANUAL RISK REVIEW (\" & CountRows(colRiskNotes) & \")\" & Char(10) &\n  Concat(\n    FirstN(colRiskNotes, 3),\n    \"Requirement: \" & RequirementExcerpt & Char(10) & ReviewPrompt & Char(10) & \"Estimate: needs human review\" & Char(10)\n  )\n)"
+                                          VerticalAlign: =VerticalAlign.Top
+                                          Width: =Parent.Width
+                        - ReviewActions:
+                            Control: GroupContainer
+                            Variant: AutoLayout
+                            Properties:
+                              FillPortions: =0
+                              Height: =48
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Horizontal
+                              LayoutGap: =10
+                              LayoutMinHeight: =If(App.Width < 480, 96, 48)
+                              LayoutMinWidth: =260
+                              LayoutWrap: =true
+                            Children:
+                              - BackToUpload:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Return to requirement upload"
+                                    Appearance: =ButtonAppearance.Secondary
+                                    BasePaletteColor: =varBrandBlue
+                                    Height: =40
+                                    OnSelect: =Navigate(Upload, ScreenTransition.Fade)
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: ="Back to upload"
+                                    Width: =136
+                              - ApproveStories:
+                                  Control: ModernButton
+                                  Properties:
+                                    AccessibleLabel: ="Approve only selected user story rows for the Jira draft queue"
+                                    BasePaletteColor: =varBrandBlue
+                                    Height: =40
+                                    OnSelect: "=If(\n  CountRows(Filter(colUserStories, SelectedForJira = true)) = 0,\n  Notify(\"Select one or more stories using the row checkboxes before approving.\", NotificationType.Information),\n  UpdateIf(\n    colUserStories,\n    SelectedForJira = true,\n    {ApprovalStatus: \"Approved\"}\n  );\n  IfError(\n    SaveData(colUserStories, \"AIRequirementAnalyzerStories\");\n    Notify(\"Selected stories approved for the local Jira draft queue. Nothing has been sent to Jira.\", NotificationType.Success),\n    Notify(\"Approvals changed for this session but could not be saved on this device. Open Power Apps Mobile or Windows for local persistence.\", NotificationType.Warning)\n  )\n)"
+                                    RadiusBottomLeft: =999
+                                    RadiusBottomRight: =999
+                                    RadiusTopLeft: =999
+                                    RadiusTopRight: =999
+                                    Text: =If(CountRows(Filter(colUserStories, SelectedForJira = true)) = 0, "Approve selected for Jira", "Approve selected (" & CountRows(Filter(colUserStories, SelectedForJira = true)) & ")")
+                                    Width: =If(App.Width < 480, 220, 240)
